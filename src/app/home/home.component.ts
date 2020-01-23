@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppserviceService } from '../appservice.service';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -9,23 +9,40 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class HomeComponent implements OnInit {
 
-  // profileForm = new FormGroup({
-  //   permission_name1: new FormControl(''),
-  //   permission_name2: new FormControl(''),
-  //   permission_name3: new FormControl(''),
-  //   permission_name4: new FormControl(''),
-  //   permission_name5: new FormControl(''),
-  //   permission_name6: new FormControl(''),
-  //   permission_name7: new FormControl(''),
-  //   permission_name8: new FormControl(''),
-  //   permission_name9: new FormControl(''),
-  //   permission_name10: new FormControl(''),
-  //   permission_name11: new FormControl('')
+  // permissionsForm = this.allSelections.group({
+  //   perm1: new FormControl(''),
+  //   perm2: new FormControl(''),
+  //   perm3: new FormControl(''),
+  //   perm4: new FormControl(''),
+  //   perm5: new FormControl(''),
+  //   perm6: new FormControl(''),
+  //   perm7: new FormControl(''),
+  //   perm8: new FormControl(''),
+  //   perm9: new FormControl(''),
+  //   perm10: new FormControl(''),
+  //   perm11: new FormControl('')
   // });
 
-  msg: string = null;
+  permissionsForm = this.allSelections.group({
+    perms: this.allSelections.array([
+      this.allSelections.control('')
+    ])
+  });
+  
+get perms() {
+  return this.permissionsForm.get('perms') as FormArray;
+}
 
-  // onSubmit() {
+addPerm() {
+  this.perms.push(this.allSelections.control(''));
+}
+  // msg: string = null;
+
+  onSubmit() {
+    
+     // TODO: Use EventEmitter with form value
+     console.warn(this.permissionsForm.value);
+    //  this.permissionsForm.reset;
   //   if (this.profileForm.valid) {
   //     this.appserviceService.sendRequest(this.profileForm.value)
   //     .subscribe(
@@ -36,12 +53,12 @@ export class HomeComponent implements OnInit {
   //   this.profileForm.reset();
   //   this.msg = "Request sent successfully!";
   //       }
-  // }
-  constructor(private appserviceService: AppserviceService) { }
+  }
+
+  constructor(private appserviceService: AppserviceService, private allSelections: FormBuilder) { }
 
   ngOnInit() {
-
-
+ 
   }
 
 }

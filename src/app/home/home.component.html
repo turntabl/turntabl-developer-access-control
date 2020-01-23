@@ -21,33 +21,41 @@
       
   </div> -->
   
-<form>
+  <form [formGroup]="permissionsForm" (ngSubmit)="onSubmit()">
   <div>
-    <button type="submit" class="btn btn-primary but">Submit</button>
+    <button type="submit" [disabled] ="!permissionsForm.valid" class="btn btn-primary but">Submit</button>
   </div>
-  <div class="col-3 pems">
+  <!-- <p>
+    Form Value: {{ profileForm.value | json }}
+  </p>
+  <p>
+    Form Status: {{ profileForm.status }}
+  </p> -->
+  
+  <div class="col-3 pems" formArrayName="perms">
     <h4>Select permissions</h4>
     <div class="btn-group row" data-toggle="buttons">
 
-      <div class="card ca row-5 btn btn-default" style="width: 22rem;">
+      <!-- <div *ngFor="let i=index"> -->
+      <div class="card ca row-5 btn btn-default" (click)="addPerm()" style="width: 22rem;">
         <div class="card-body">
           <h6 class="card-title">Name</h6>
           <label class="">
-            <input type="checkbox" value="apple">applepermissiononthegoguujyiijioo
+            <input type="checkbox" [formControlName]="i" value="apple">myRedShiftRole
         </label>
           <h6 class="card-subtitle mb-2 text-muted">Description</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="card-text">Allows Redshift clusters to call AWS services on your behalf.</p>
         </div>
       </div>
 
-      <div class="card ca row-5 btn btn-default"  style="width: 22rem;">
+      <div class="card ca row-5 btn btn-default" (click)="addPerm()" style="width: 22rem;">
         <div class="card-body">
           <h6 class="card-title">Name</h6>
           <label class="">
-            <input type="checkbox" value="apple">applepermissiononthegoguujyiijioo
+            <input type="checkbox" [formControlName]="i" value="apple">myRedShiftRole
         </label>
           <h6 class="card-subtitle mb-2 text-muted">Description</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="card-text">Allows Redshift clusters to call AWS services on your behalf.</p>
         </div>
       </div>
 
@@ -55,10 +63,10 @@
         <div class="card-body">
           <h6 class="card-title">Name</h6>
           <label class="">
-            <input type="checkbox" value="apple">applepermissiononthegoguujyiijioo
+            <input type="checkbox" [formControlName]="i" value="apple">myRedShiftRole
         </label>
           <h6 class="card-subtitle mb-2 text-muted">Description</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="card-text">Allows Redshift clusters to call AWS services on your behalf.</p>
         </div>
       </div>
         
@@ -66,10 +74,10 @@
         <div class="card-body">
           <h6 class="card-title">Name</h6>
           <label class="">
-            <input type="checkbox" value="apple">applepermissiononthegoguujyiijioo
+            <input type="checkbox" [formControlName]="i" value="apple">myRedShiftRole
         </label>
           <h6 class="card-subtitle mb-2 text-muted">Description</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="card-text">Allows Redshift clusters to call AWS services on your behalf.</p>
         </div>
       </div>
 
@@ -77,10 +85,10 @@
         <div class="card-body">
           <h6 class="card-title">Name</h6>
           <label class="">
-            <input type="checkbox" value="apple">applepermissiononthegoguujyiijioo
+            <input type="checkbox" [formControlName]="i" value="apple">myRedShiftRole
         </label>
           <h6 class="card-subtitle mb-2 text-muted">Description</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="card-text">Allows Redshift clusters to call AWS services on your behalf.</p>
         </div>
       </div>
 
@@ -88,10 +96,10 @@
         <div class="card-body">
           <h6 class="card-title">Name</h6>
           <label class="">
-            <input type="checkbox" value="apple">applepermissiononthegoguujyiijioo
+            <input type="checkbox" [formControlName]="i" value="apple">myRedShiftRole
         </label>
           <h6 class="card-subtitle mb-2 text-muted">Description</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="card-text">Allows Redshift clusters to call AWS services on your behalf.</p>
         </div>
       </div>
 
@@ -99,10 +107,10 @@
         <div class="card-body">
           <h6 class="card-title">Name</h6>
           <label class="">
-            <input type="checkbox" value="apple">applepermissiononthegoguujyiijioo
+            <input type="checkbox" [formControlName]="i" value="apple">myRedShiftRole
         </label>
           <h6 class="card-subtitle mb-2 text-muted">Description</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="card-text">Allows Redshift clusters to call AWS services on your behalf.</p>
         </div>
       </div>
 
@@ -110,10 +118,10 @@
         <div class="card-body">
           <h6 class="card-title">Name</h6>
           <label class="">
-            <input type="checkbox" value="apple">applepermissiononthegoguujyiijioo
+            <input type="checkbox" [formControlName]="i" value="apple">myRedShiftRole
         </label>
           <h6 class="card-subtitle mb-2 text-muted">Description</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="card-text">Allows Redshift clusters to call AWS services on your behalf.</p>
         </div>
       </div>
 
@@ -121,10 +129,10 @@
         <div class="card-body">
           <h6 class="card-title">Name</h6>
           <label class="">
-            <input type="checkbox" value="apple">applepermissiononthegoguujyiijioo
+            <input type="checkbox" [formControlName]="i" value="apple">myRedShiftRole
         </label>
           <h6 class="card-subtitle mb-2 text-muted">Description</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="card-text">Allows Redshift clusters to call AWS services on your behalf.</p>
         </div>
       </div>
 
@@ -132,10 +140,10 @@
         <div class="card-body">
           <h6 class="card-title">Name</h6>
           <label class="">
-            <input type="checkbox" value="apple">applepermissiononthegoguujyiijioo
+            <input type="checkbox" [formControlName]="i" value="apple">myRedShiftRole
         </label>
           <h6 class="card-subtitle mb-2 text-muted">Description</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="card-text">Allows Redshift clusters to call AWS services on your behalf.</p>
         </div>
       </div>
 
@@ -143,16 +151,18 @@
         <div class="card-body">
           <h6 class="card-title">Name</h6>
           <label class="">
-            <input type="checkbox" value="apple">applepermissiononthegoguujyiijioo
+            <input type="checkbox" [formControlName]="i" value="apple">myRedShiftRole
         </label>
           <h6 class="card-subtitle mb-2 text-muted">Description</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="card-text">Allows Redshift clusters to call AWS services on your behalf.</p>
         </div>
       </div>
       
     </div>
-</div>
+    </div>
+<!-- </div> -->
 <div>
-  <button type="submit" class="btn btn-primary but">Submit</button>
+  <button type="submit" [disabled] ="!permissionsForm.valid" class="btn btn-primary but">Submit</button>
 </div>
 </form>
+
