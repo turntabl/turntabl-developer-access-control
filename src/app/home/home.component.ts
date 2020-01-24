@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AppserviceService } from '../appservice.service';
 import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+// import { IDropdownSettings } from 'ng-multiselect-dropdown/public_api';
+// import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-home',
@@ -10,9 +12,10 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 })
 
 export class HomeComponent implements OnInit {
+  dropdownSettings:IDropdownSettings;
   dropdownList = [];
   selectedItems = [];
-  dropdownSettings = {};
+  // onDeSelect = this.onItemDeSelect(Event);
   buildPerms() {
     const arr = this.permissions.perms.map(perm => {
       return this.allSelections.control(perm.selected);
@@ -43,8 +46,8 @@ export class HomeComponent implements OnInit {
   // });
 permissions = {
   perms : [
-    {name: 'myRedShiftRole', selected: true, id: 'i'},
-    {name: 'perm2', selected: true, id: 'i'}
+    {item: 'myRedShiftRole', selected: true, id: 'i'},
+    {item: 'perm2', selected: true, id: 'i'}
   ]
 }
   permissionsForm = this.allSelections.group({
@@ -68,19 +71,8 @@ addPerm() {
   onSubmit() {
     
      // TODO: Use EventEmitter with form value
-     console.warn(this.permissionsForm.value);
-    //  console.log(this.permissionsForm.controls.perm1.)
-    //  this.permissionsForm.reset;
-  //   if (this.profileForm.valid) {
-  //     this.appserviceService.sendRequest(this.profileForm.value)
-  //     .subscribe(
-  //       data => {
-  //           console.log("Request Submitted!");
-  //         }
-  //     )
-  //   this.profileForm.reset();
-  //   this.msg = "Request sent successfully!";
-  //       }
+     console.log(this.selectedItems);
+   
   }
   submit(value) {
     const formValue = Object.assign({}, value, {
@@ -97,32 +89,50 @@ addPerm() {
 
   ngOnInit() {
     this.dropdownList = [
-      { item_id: 1, item_text: 'Mumbai' },
-      { item_id: 2, item_text: 'Bangaluru' },
-      { item_id: 3, item_text: 'Pune' },
-      { item_id: 4, item_text: 'Navsari' },
-      { item_id: 5, item_text: 'New Delhi' }
+      { item_id: 1, item_text: 'myRedShiftRole', roleARN: 'arn:aws:iam::926377470665:role/myRedShiftRole', item_description: 'Allows Redshift clusters to call AWS services on your behalf.'},
+      { item_id: 2, item_text: 'AWSServiceRoleForRDS', roleARN: 'arn:aws:iam::926377470665:role/aws-service-role/rds.amazonaws.com/AWSServiceRoleForRDS', item_description: 'Allows Amazon RDS to manage AWS resources on your behalf' },
+      { item_id: 3, item_text: 'aws-elasticbeanstalk-ec2-role', roleARN: '', item_description: 'null' },
+      { item_id: 4, item_text: 'AWSServiceRoleForOrganizations', roleARN: '', item_description: 'Service-linked role used by AWS Organizations to enable integration of other AWS services with Organizations.' },
+      { item_id: 5, item_text: 'AWSServiceRoleForElasticLoadBalancing', roleARN: '', item_description: 'Allows ELB to call AWS services on your behalf.' }
     ];
     this.selectedItems = [
-      { item_id: 3, item_text: 'Pune' },
-      { item_id: 4, item_text: 'Navsari' }
+      
     ];
-    this.dropdownSettings IDropdownSettings = {
+    this.dropdownSettings = {
       singleSelection: false,
       idField: 'item_id',
       textField: 'item_text',
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 3,
+      itemsShowLimit: 5,
       allowSearchFilter: true
     };
     
   }
-
+  // app: any.filter('item_text', function() {
+  //   return function(items, item) {
+  //       var arrayToReturn = [];
+  //       for (var i = 0; i < items.length; i++) {
+  //           if (items[i].item != item.item) {
+  //               arrayToReturn.push(items[i]);
+  //           }
+  //       }
+  //       return arrayToReturn;
+  //   };
+// });
   onItemSelect(item: any) {
     console.log(item);
+    this.selectedItems.push(item);
   }
+
+  onItemDeSelect(item: any){
+    this.selectedItems.splice(this.selectedItems.indexOf(item), 1);
+    console.log(item + "removed")
+    console.log(this.selectedItems)
+  }
+
   onSelectAll(items: any) {
+    this.selectedItems.push(items);
     console.log(items);
   }
 }
