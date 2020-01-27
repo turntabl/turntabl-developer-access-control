@@ -18,10 +18,10 @@ export class AppserviceService {
   private apiURL = 'http://accountpermission-env.nbhdf7zwaf.eu-west-2.elasticbeanstalk.com/v1/api/aws-mgnt/';
   constructor(private httpClient: HttpClient) { }
 
-  getCustomers(): Observable<RolesList[]> {
-    return this.httpClient.get<RolesList[]>(this.apiURL);
+  getRolesListing(): Observable<RolesList[]> {
+    return this.httpClient.get<RolesList[]>(this.apiURL + 'roles');
   }
-  postCustomer(roleRequest: RoleRequest): Observable<RoleRequest> {
-    return this.httpClient.post<RoleRequest>(this.apiURL, roleRequest, httpOptions);
+  postRequest(roleRequest: RoleRequest): Observable<RoleRequest> {
+    return this.httpClient.post<RoleRequest>(this.apiURL + 'send', roleRequest, httpOptions);
   }
 }

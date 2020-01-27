@@ -9,6 +9,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import {MultiSelectModule} from 'primeng/multiselect';
 import {ButtonModule} from 'primeng/button';
+import { HttpClientModule } from '@angular/common/http';
+import { AppserviceService } from './appservice.service';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -27,9 +29,12 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     FormsModule, MultiSelectModule,
     ButtonModule, BrowserAnimationsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     NgMultiSelectDropDownModule.forRoot()
   ],
-  providers: [],
+  providers: [
+  AppserviceService
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })

@@ -6,6 +6,9 @@ import {
   FormControl,
   ValidatorFn
 } from '@angular/forms';
+import { RoleRequest } from '../role-request';
+import { RolesList } from '../roles-list';
+import { AppserviceService } from '../appservice.service';
 
 @Component({
   selector: 'app-home',
@@ -13,18 +16,26 @@ import {
   styleUrls: ['./home.component.css']
 })
 
-export class HomeComponent {
+export class HomeComponent implements OnInit{
   form: FormGroup;
-  rolesList = [
-    { roleName: 'myRedShiftRole', roleARN:'arn:aws:iam::926377470665:role/myRedShiftRole', description:'Allows Redshift clusters to call AWS services on your behalf.' },
-    { roleName: 'AWSServiceRoleForRDS', roleARN:'arn:aws:iam::926377470665:role/aws-service-role/rds.amazonaws.com/AWSServiceRoleForRDS', description:'Service-linked role used by AWS Organizations to enable integration of other AWS services with Organizations.' }
-  ];
+  rolesList: RolesList[] = [];
 
   selectedRoles = [];
-  constructor(private formBuilder: FormBuilder) {
+
+  constructor(private formBuilder: FormBuilder, private service: AppserviceService) {
     this.form = this.formBuilder.group({
       roles: new FormArray([])
     });
+  }
+
+  ngOnInit() {
+    this.service.getRolesListing().subscribe(
+      result => {
+          this.rolesList = result;
+          console.log(result);
+      },
+      error => { console.log(error); }
+   ); 
   }
 
   onCheckChange(event) {
@@ -54,7 +65,16 @@ export class HomeComponent {
   }
 
   submit(){
-    console.log(this.selectedRoles);
+    let request: RoleRequest;
+    request.awsArns = this.selectedRoles;
+    request.email = 'user@email.io';
+    
+     const data = JSON.stringify(request, null, 4);
+      /*this.service.postRequest(JSON.parse(data)).subscribe(
+        result => { console.log(result); },
+        error => { console.log(error); }
+      ); */
+      alert('SUCCESS!! :-)\n\n' + data + '\n Request submitted successfully!');
     
   }
 
