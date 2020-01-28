@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit{
 
   selectedRoles = [];
   userEmail = '';
-  userName = '';
+  // userName = '';
 
   constructor(private formBuilder: FormBuilder, private service: AppserviceService,  private cookieService: CookieService) {
     this.form = this.formBuilder.group({
@@ -73,8 +73,8 @@ export class HomeComponent implements OnInit{
   submit(){
     let request: RoleRequest = {
       awsArns: this.selectedRoles,
-      email: this.userEmail,
-      name: this.userName
+      email: this.userEmail
+      // name: this.userName
     }; 
     
      const data = JSON.stringify(request);
