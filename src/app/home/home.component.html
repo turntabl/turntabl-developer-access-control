@@ -8,7 +8,7 @@
 </nav>
 <div class="text-center">
 <div class="alert alert-success" role="alert">
-
+{{ msg }}
 </div>
 <!-- <div class="alert alert-danger" role="alert">
   Sorry! Something went wrong!
@@ -22,13 +22,24 @@
 
          <div class="form-group form-check">
           
-          <div class="card-body border border-info rounded-pill">
+          <!-- <div class="card-body border border-info rounded-pill">
             <h5 class="card-title">{{choice.roleName}}</h5>
             <p class="card-text">-{{choice.description}}</p> 
             <input type="checkbox" [value]="choice.roleARN"  class="form-check-input form-control chk" (change)="onCheckChange($event)" id="exampleCheck1">
-          </div>
+          </div> -->
+          
          </div>
-
+         <div class="card ca btn btn-default"  style="width: 22rem;">
+          <div class="card-body">
+            <h6 class="card-title">Name</h6>
+            <label class="card-title">
+            {{choice.roleName}}
+          </label>
+            <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+            <p class="card-text">{{choice.description}}</p>
+            <input type="checkbox" [value]="choice.roleARN"  class="form-check-input form-control chk" (change)="onCheckChange($event)" id="exampleCheck1">
+          </div>
+    </div>
     </div>   
     <button class="btn btn-lg btn-success" >submit</button>
   </form>

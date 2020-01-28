@@ -20,7 +20,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class HomeComponent implements OnInit{
   form: FormGroup;
   rolesList: RolesList[] = [];
-
+  msg: String = null;
   selectedRoles = [];
   userEmail = '';
   // userName = '';
@@ -82,6 +82,7 @@ export class HomeComponent implements OnInit{
         result => { console.log(result); },
         error => { console.log(error); }
       );
+      this.msg = "Request successfully sent!!";
       alert('SUCCESS!! :-)\n\n' + data + '\n Request submitted successfully!');
     
   }
