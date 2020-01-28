@@ -15,7 +15,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AppserviceService {
-  private apiURL = 'http://accountpermission-env.nbhdf7zwaf.eu-west-2.elasticbeanstalk.com/v1/api/aws-mgnt/';
+  private apiURL = 'https://permission.services.turntabl.io/v1/api/aws-mgnt/';
   constructor(private httpClient: HttpClient) { }
 
   getRolesListing(): Observable<RolesList[]> {
