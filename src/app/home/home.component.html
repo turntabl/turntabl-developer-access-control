@@ -15,34 +15,36 @@
 </div> -->
 </div> 
 
-<div class="fm form-container d-flex align-items-center">
+<div class="fm form-container d-flex align-items-center col-6">
   <form [formGroup]="form" (ngSubmit)="submit()">
-    <div *ngFor="let choice of rolesList; let i=index" class="form-group row">
 
+    <div class="align-items-center row">
+        <button class="btn btn-lg btn-success btn-center" >submit</button>
+    </div>
 
-         <div class="form-group form-check">
-          
-          <!-- <div class="card-body border border-info rounded-pill">
-            <h5 class="card-title">{{choice.roleName}}</h5>
-            <p class="card-text">-{{choice.description}}</p> 
-            <input type="checkbox" [value]="choice.roleARN"  class="form-check-input form-control chk" (change)="onCheckChange($event)" id="exampleCheck1">
-          </div> -->
-          
-         </div>
+    <div *ngFor="let choice of rolesList; let i=index" class="form-group row car">
+
          <div class="card ca btn btn-default"  style="width: 22rem;">
           <div class="card-body">
-            <h6 class="card-title">Name</h6>
-            <label class="card-title">
-            {{choice.roleName}}
-          </label>
+            <h6 class="card-title">{{choice.roleName}}</h6>
             <h6 class="card-subtitle mb-2 text-muted">Description</h6>
             <p class="card-text">{{choice.description}}</p>
             <input type="checkbox" [value]="choice.roleARN"  class="form-check-input form-control chk" (change)="onCheckChange($event)" id="exampleCheck1">
           </div>
-    </div>
+        </div>
+
     </div>   
-    <button class="btn btn-lg btn-success" >submit</button>
+
+    <div class="align-items-center row">
+      <button class="btn btn-lg btn-success btn-center" >submit</button>
+    </div>
+
   </form>
 </div>
+<div class="text-center">
+  <div class="alert alert-success" role="alert">
+  {{ msg }}
+  </div>
+  </div> 
 
    

@@ -1,6 +1,18 @@
 .fm{
-	margin-left: 20%;
+	margin-left: 40%;
+	margin-bottom: 8%;
 }
 .chk{
 	width: 15%;
+}
+ 
+.car {
+	margin-top: 8%;
+	margin-bottom: 8%;
+}
+.btn-center{
+	margin-left: 27%;
+}
+.btn {
+	width: 50%;
 }
