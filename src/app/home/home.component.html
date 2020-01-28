@@ -6,13 +6,15 @@
     Turntabl
   </a>
 </nav>
-<div class="text-center">
-<div class="alert alert-success" role="alert">
-{{ msg }}
-</div>
-<!-- <div class="alert alert-danger" role="alert">
-  Sorry! Something went wrong!
-</div> -->
+
+
+<div class="text-center" *ngIf="msgShow == true" > 
+  <div class="alert alert-danger" *ngIf="valid == false" role="alert">
+    {{ msg }}
+  </div>
+  <div class="alert alert-success" *ngIf="valid == true" role="alert">
+    {{ msg }}
+  </div>
 </div> 
 
 <div class="fm form-container d-flex align-items-center col-6">
@@ -41,10 +43,14 @@
 
   </form>
 </div>
-<div class="text-center">
-  <div class="alert alert-success" role="alert">
-  {{ msg }}
+
+<div class="text-center" *ngIf="msgShow == true" > 
+  <div class="alert alert-danger" *ngIf="valid == false" role="alert">
+    {{ msg }}
   </div>
-  </div> 
+  <div class="alert alert-success" *ngIf="valid == true" role="alert">
+    {{ msg }}
+  </div>
+</div> 
 
    

@@ -22,8 +22,9 @@ export class HomeComponent implements OnInit{
   rolesList: RolesList[] = [];
   msg: String = null;
   selectedRoles = [];
-  userEmail = '';
-  // userName = '';
+  userEmail = ''; 
+  msgShow: boolean =  false;
+  valid:boolean;
 
   constructor(private formBuilder: FormBuilder, private service: AppserviceService,  private cookieService: CookieService) {
     this.form = this.formBuilder.group({
@@ -32,19 +33,18 @@ export class HomeComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.userEmail = this.cookieService.get('ttpEmail');
-    // this.userName  = this.cookieService.get
+    this.userEmail = this.cookieService.get('ttpEmail'); 
 
     this.service.getRolesListing().subscribe(
       result => {
           this.rolesList = result;
-          console.log(result);
       },
       error => { console.log(error); }
    ); 
   }
 
   onCheckChange(event) {
+    this.msgShow = false;
     const formArray: FormArray = this.form.get('roles') as FormArray;
   
     /* Selected */
@@ -71,10 +71,10 @@ export class HomeComponent implements OnInit{
   }
 
   submit(){
-    let request: RoleRequest = {
+    if( this.selectedRoles.length > 0 && this.cookieService.check('ttpEmail')){
+      let request: RoleRequest = {
       awsArns: this.selectedRoles,
       email: this.userEmail
-      // name: this.userName
     }; 
     
      const data = JSON.stringify(request);
@@ -82,9 +82,16 @@ export class HomeComponent implements OnInit{
         result => { console.log(result); },
         error => { console.log(error); }
       );
-      this.msg = "Request successfully sent!!";
-      alert('SUCCESS!! :-)\n\n' + data + '\n Request submitted successfully!');
+      console.log(data);
+      this.msg = "Request successfully sent!";
+      this.valid = true;
+    }
+    else{
     
+      this.valid = false;
+    this.msg = "Invalid Selection!"
+  }  
+    this.msgShow = true;
   }
 
 }
