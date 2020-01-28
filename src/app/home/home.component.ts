@@ -20,9 +20,11 @@ import { CookieService } from 'ngx-cookie-service';
 export class HomeComponent implements OnInit{
   form: FormGroup;
   rolesList: RolesList[] = [];
-
-  selectedRoles = [];
-  userEmail = '';
+  msg: String = null;
+  selectedRoles = []; 
+  userEmail = ''; 
+  msgShow: boolean =  false;
+  valid:boolean; 
 
   constructor(private formBuilder: FormBuilder, private service: AppserviceService,  private cookieService: CookieService) {
     this.form = this.formBuilder.group({
@@ -36,13 +38,13 @@ export class HomeComponent implements OnInit{
     this.service.getRolesListing().subscribe(
       result => {
           this.rolesList = result;
-          console.log(result);
       },
       error => { console.log(error); }
    ); 
   }
 
   onCheckChange(event) {
+    this.msgShow = false;
     const formArray: FormArray = this.form.get('roles') as FormArray;
   
     /* Selected */
@@ -70,21 +72,28 @@ export class HomeComponent implements OnInit{
 
   submit(){
     if( this.selectedRoles.length > 0 && this.cookieService.check('ttpEmail')){
-        let request: RoleRequest = {
-        awsArns: this.selectedRoles,
-        email: this.userEmail
-      }; 
-      
-       const data = JSON.stringify(request);
-        this.service.postRequest(JSON.parse(data)).subscribe(
-          result => { console.log(result); },
-          error => { console.log(error); }
-        );
-        alert('SUCCESS!! :-)\n\n' + data + '\n Request submitted successfully!');
-      }
+ 
+      let request: RoleRequest = {
+      awsArns: this.selectedRoles,
+      email: this.userEmail
+    }; 
+    
+     const data = JSON.stringify(request);
+      this.service.postRequest(JSON.parse(data)).subscribe(
+        result => { console.log(result); },
+        error => { console.log(error); }
+      );
+      console.log(data);
+      this.msg = "Request successfully sent!";
+      this.valid = true;
+    }
     else{
-      alert('Invalid Select');
-    }  
+    
+      this.valid = false;
+    this.msg = "Invalid Selection!"
+  }  
+    this.msgShow = true;
+ 
   }
 
 }
