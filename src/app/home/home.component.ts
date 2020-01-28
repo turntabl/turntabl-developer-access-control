@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit{
 
   selectedRoles = [];
   userEmail = '';
+  userName = '';
 
   constructor(private formBuilder: FormBuilder, private service: AppserviceService,  private cookieService: CookieService) {
     this.form = this.formBuilder.group({
@@ -31,7 +32,8 @@ export class HomeComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.userEmail = this.cookieService.get('ttemail');
+    this.userEmail = this.cookieService.get('ttpEmail');
+    this.userName  = this.cookieService.get
 
     this.service.getRolesListing().subscribe(
       result => {
@@ -71,7 +73,8 @@ export class HomeComponent implements OnInit{
   submit(){
     let request: RoleRequest = {
       awsArns: this.selectedRoles,
-      email: this.userEmail
+      email: this.userEmail,
+      name: this.userName
     }; 
     
      const data = JSON.stringify(request);
