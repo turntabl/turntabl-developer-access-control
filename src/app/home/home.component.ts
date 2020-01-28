@@ -69,7 +69,7 @@ export class HomeComponent implements OnInit{
   }
 
   submit(){
-    if( this.selectedRoles.length > 0 && cookieService.check('ttpEmail')){
+    if( this.selectedRoles.length > 0 && this.cookieService.check('ttpEmail')){
         let request: RoleRequest = {
         awsArns: this.selectedRoles,
         email: this.userEmail
