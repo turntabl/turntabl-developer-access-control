@@ -69,18 +69,22 @@ export class HomeComponent implements OnInit{
   }
 
   submit(){
-    let request: RoleRequest = {
-      awsArns: this.selectedRoles,
-      email: this.userEmail
-    }; 
-    
-     const data = JSON.stringify(request);
-      this.service.postRequest(JSON.parse(data)).subscribe(
-        result => { console.log(result); },
-        error => { console.log(error); }
-      );
-      alert('SUCCESS!! :-)\n\n' + data + '\n Request submitted successfully!');
-    
+    if( this.selectedRoles.length > 0 && cookieService.check('ttpEmail')){
+        let request: RoleRequest = {
+        awsArns: this.selectedRoles,
+        email: this.userEmail
+      }; 
+      
+       const data = JSON.stringify(request);
+        this.service.postRequest(JSON.parse(data)).subscribe(
+          result => { console.log(result); },
+          error => { console.log(error); }
+        );
+        alert('SUCCESS!! :-)\n\n' + data + '\n Request submitted successfully!');
+      }
+    else{
+      alert('Invalid Select');
+    }  
   }
 
 }
