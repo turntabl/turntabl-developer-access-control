@@ -15,19 +15,23 @@
 </div> -->
 </div> 
 
+<div class="fm form-container d-flex align-items-center">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div *ngFor="let choice of rolesList; let i=index" class="form-group row">
 
-<form [formGroup]="form" (ngSubmit)="submit()">
-  
-  <div *ngFor="let choice of rolesList; let i=index" class="col-md-2">
-    <label>
-      <input type="checkbox" [value]="choice.roleARN"  (change)="onCheckChange($event)">
-      <span class="header">{{choice.roleName}}</span>
-      <p>{{choice.description}}</p>
-      
-    </label>
-  </div>  
-  
-  <button>submit</button>
-</form>
+
+         <div class="form-group form-check">
+          
+          <div class="card-body border border-info rounded-pill">
+            <h5 class="card-title">{{choice.roleName}}</h5>
+            <p class="card-text">-{{choice.description}}</p> 
+            <input type="checkbox" [value]="choice.roleARN"  class="form-check-input form-control chk" (change)="onCheckChange($event)" id="exampleCheck1">
+          </div>
+         </div>
+
+    </div>   
+    <button class="btn btn-lg btn-success" >submit</button>
+  </form>
+</div>
 
    

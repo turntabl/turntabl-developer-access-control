@@ -11,6 +11,8 @@ import {MultiSelectModule} from 'primeng/multiselect';
 import {ButtonModule} from 'primeng/button';
 import { HttpClientModule } from '@angular/common/http';
 import { AppserviceService } from './appservice.service';
+// Cookie stuff
+import {CookieService} from 'ngx-cookie-service';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -29,10 +31,11 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     FormsModule, MultiSelectModule,
     ButtonModule, BrowserAnimationsModule,
     ReactiveFormsModule,
-    HttpClientModule,
+    HttpClientModule, 
     NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [
+  CookieService,
   AppserviceService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -9,6 +9,7 @@ import {
 import { RoleRequest } from '../role-request';
 import { RolesList } from '../roles-list';
 import { AppserviceService } from '../appservice.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-home',
@@ -21,14 +22,17 @@ export class HomeComponent implements OnInit{
   rolesList: RolesList[] = [];
 
   selectedRoles = [];
+  userEmail = '';
 
-  constructor(private formBuilder: FormBuilder, private service: AppserviceService) {
+  constructor(private formBuilder: FormBuilder, private service: AppserviceService,  private cookieService: CookieService) {
     this.form = this.formBuilder.group({
       roles: new FormArray([])
     });
   }
 
   ngOnInit() {
+    this.userEmail = this.cookieService.get('ttemail');
+
     this.service.getRolesListing().subscribe(
       result => {
           this.rolesList = result;
@@ -65,15 +69,16 @@ export class HomeComponent implements OnInit{
   }
 
   submit(){
-    let request: RoleRequest;
-    request.awsArns = this.selectedRoles;
-    request.email = 'user@email.io';
+    let request: RoleRequest = {
+      awsArns: this.selectedRoles,
+      email: this.userEmail
+    }; 
     
-     const data = JSON.stringify(request, null, 4);
-      /*this.service.postRequest(JSON.parse(data)).subscribe(
+     const data = JSON.stringify(request);
+      this.service.postRequest(JSON.parse(data)).subscribe(
         result => { console.log(result); },
         error => { console.log(error); }
-      ); */
+      );
       alert('SUCCESS!! :-)\n\n' + data + '\n Request submitted successfully!');
     
   }
