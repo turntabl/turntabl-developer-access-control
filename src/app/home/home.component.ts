@@ -21,10 +21,10 @@ export class HomeComponent implements OnInit{
   form: FormGroup;
   rolesList: RolesList[] = [];
   msg: String = null;
-  selectedRoles = [];
+  selectedRoles = []; 
   userEmail = ''; 
   msgShow: boolean =  false;
-  valid:boolean;
+  valid:boolean; 
 
   constructor(private formBuilder: FormBuilder, private service: AppserviceService,  private cookieService: CookieService) {
     this.form = this.formBuilder.group({
@@ -72,6 +72,7 @@ export class HomeComponent implements OnInit{
 
   submit(){
     if( this.selectedRoles.length > 0 && this.cookieService.check('ttpEmail')){
+ 
       let request: RoleRequest = {
       awsArns: this.selectedRoles,
       email: this.userEmail
@@ -92,6 +93,7 @@ export class HomeComponent implements OnInit{
     this.msg = "Invalid Selection!"
   }  
     this.msgShow = true;
+ 
   }
 
 }
