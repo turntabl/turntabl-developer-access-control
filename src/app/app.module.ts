@@ -22,6 +22,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 // import { MDBBootstrapModule } from 'angular-bootstrap-md';
 // import { MdbNavBar} from './mdb-nav-bar.component';
+// import { ModalComponent } from './modal/modal.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     BrowserAnimationsModule,
     // MdbNavBar,
     // MDBBootstrapModule.forRoot(),
+    // ModalModule.forRoot(),
+    MatCheckboxModule,
     NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [
