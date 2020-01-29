@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
 import {MenuItem} from 'primeng/api';                 //api
@@ -20,6 +20,9 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
+// import { MDBBootstrapModule } from 'angular-bootstrap-md';
+// import { MdbNavBar} from './mdb-nav-bar.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,13 +35,16 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     ButtonModule, BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule, 
+    BrowserAnimationsModule,
+    // MdbNavBar,
+    // MDBBootstrapModule.forRoot(),
     NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [
   CookieService,
   AppserviceService
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

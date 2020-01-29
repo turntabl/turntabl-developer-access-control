@@ -1,11 +1,5 @@
 
 <!-- Image and text -->
-<nav class="navbar navbar-primary bg-info">
-  <a class="navbar-brand" href="#">
-    <img src="../../assets/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-    Turntabl
-  </a>
-</nav>
 
 <div class="text-center" *ngIf="msgShow == true" > 
   <div class="alert alert-danger" *ngIf="valid == false" role="alert">
@@ -20,24 +14,25 @@
   <form [formGroup]="form" (ngSubmit)="submit()">
 
     <div class="align-items-center row">
-        <button class="btn btn-lg btn-success btn-center" >submit</button>
+        <button class="btn btn-lg btn-primary btn-center" >DONE</button>
     </div>
 
-    <div *ngFor="let choice of rolesList; let i=index" class="form-group row car">
+    <div *ngFor="let choice of rolesList; let i=index" class="form-group row car checkbox">
 
-         <div class="card ca btn btn-default"  style="width: 22rem;">
+         <div class="card btn-default" style="width: 25rem; height: 10rem;">
           <div class="card-body">
+            <input type="checkbox" [value]="choice.roleARN" (change)="onCheckChange($event)" class="chk">
+            <!-- <input type="checkbox" [value]="choice.roleARN" class="form-check-input form-control chk" 
+            (change)="onCheckChange($event)" id="exampleCheck1"> -->
             <h6 class="card-title">{{choice.roleName}}</h6>
-            <h6 class="card-subtitle mb-2 text-muted">Description</h6>
-            <p class="card-text">{{choice.description}}</p>
-            <input type="checkbox" [value]="choice.roleARN"  class="form-check-input form-control chk" (change)="onCheckChange($event)" id="exampleCheck1">
+            <h6 class="card-subtitle mb-2 text-muted">{{choice.description}}</h6>
           </div>
         </div>
 
     </div>   
 
     <div class="align-items-center row">
-      <button class="btn btn-lg btn-success btn-center" >submit</button>
+      <button class="btn btn-lg btn-primary btn-center" >DONE</button>
     </div>
 
   </form>
