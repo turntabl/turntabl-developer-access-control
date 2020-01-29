@@ -54,7 +54,6 @@ passport.serializeUser(function (user, done) {
 passport.deserializeUser(function (user, done) {
   done(null, user);
 });
-
 app.get(
   "/login",
   passport.authenticate("saml", {
@@ -95,6 +94,5 @@ app.all("*", function (req, res, next) {
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname + "/dist/turntabl-developer-access-control/index.html"));
 });
-
-// Start the app by listening on the default Heroku port
-app.listen(process.env.PORT || 8080);
+// To start the app by listening on the default Heroku port
+app.listen(process.env.PORT || 8081);
