@@ -10,8 +10,7 @@ let userEmail = "";
 const app = express();
 
 // Serve only the static files form the dist directory
-app.use(express.static(__dirname + 'process.env.APP_USE_dist'));
-// /dist/turntabl-developer-access-control
+app.use(express.static(__dirname + '/dist/turntabl-developer-access-control'));
 
 app.use(cookieParser());
 app.use(
@@ -81,10 +80,9 @@ app.post(
     // sets a cookie called ttemail and sets its max age to 1 day
     //res.cookie('ttUserName', userName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
     res.cookie('ttpEmail', userEmail, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
-    res.redirect("process.env.RUNN");
+    res.redirect(process.env.RUNN);
   }
 );
-
 app.all("*", function (req, res, next) {
   if (req.isAuthenticated() || process.env.NODE_ENV !== "production") {
     next();
@@ -93,8 +91,7 @@ app.all("*", function (req, res, next) {
   }
 });
 app.get("/*", function (req, res) {
-  res.sendFile(path.join(__dirname + "process.env.JOIN_dist"));
-  // /dist/turntabl-developer-access-control/index.html
+  res.sendFile(path.join(__dirname + "/dist/turntabl-developer-access-control/index.html"));
 });
 // To start the app by listening on the default Heroku port
 app.listen(process.env.PORT || 8081);
