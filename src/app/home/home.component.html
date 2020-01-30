@@ -37,12 +37,13 @@
   </div>
 </div> 
 
+<div class="cardb">
 <div class="fm form-container d-flex align-items-center col-6">
   <form [formGroup]="form" (ngSubmit)="submit()">
 
-    <div class="align-items-center row">
+    <!-- <div class="align-items-center row">
         <button class="btn btn-lg btn-primary btn-center" >Submit</button>
-    </div>
+    </div> -->
 
     <!-- <div *ngFor="let choice of rolesList; let i=index" class="form-group row car checkbox"> -->
 
@@ -90,15 +91,9 @@
         </section>
       </mat-card-content>
     </mat-card> -->
-    
-
-    <div class="align-items-center row">
-      <button class="btn btn-lg btn-primary btn-center" >Submit</button>
-    </div>
-
   </form>
 </div>
-
+</div>
 <div class="text-center" *ngIf="msgShow == true" > 
   <div class="alert alert-danger" *ngIf="valid == false" role="alert">
     {{ msg }}

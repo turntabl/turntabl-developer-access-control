@@ -1,0 +1,11 @@
+.btn-center{
+	margin-left: 27%;
+}
+.btn {
+	width: 10%;
+	position: fixed;
+    border-radius: 7px;
+    margin-top: 17%;
+    margin-left: 47%;
+    z-index: 999;
+}

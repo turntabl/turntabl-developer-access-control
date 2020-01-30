@@ -11,12 +11,14 @@
 	margin-top: 8%;
 	margin-bottom: 8%;
 }
-.btn-center{
+/* .btn-center{
 	margin-left: 27%;
 }
 .btn {
-	width: 50%;
-}
+	width: 40%;
+	position: fixed;
+	border-radius: 10px;
+} */
 nav{
     margin-bottom: 2%;
 }
@@ -53,6 +55,11 @@ body {
   }
   .card img{
 	width:100%;
+  }
+
+  .cardb {
+	  margin-top: 10%;
+
   }
   
   .section {
