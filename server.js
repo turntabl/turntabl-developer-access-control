@@ -81,7 +81,7 @@ app.post(
     // sets a cookie called ttemail and sets its max age to 1 day
     //res.cookie('ttUserName', userName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
     res.cookie('ttpEmail', userEmail, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
-    res.redirect(process.env.RUNN);
+    res.redirect("process.env.RUNN");
   }
 );
 
