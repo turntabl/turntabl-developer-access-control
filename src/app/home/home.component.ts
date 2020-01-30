@@ -72,7 +72,6 @@ export class HomeComponent implements OnInit{
   }
 
   submit(){ 
-
     if( this.selectedRoles.length > 0){   
       let request: RoleRequest = {
       awsArns: this.selectedRoles,
@@ -91,12 +90,10 @@ export class HomeComponent implements OnInit{
       this.valid = true;
     }
     else{
-    
-      this.valid = false;
+    this.valid = false;
     this.msg = "Invalid Selection!"
   }  
     this.msgShow = true;
- 
   }
 
 }
