@@ -1,0 +1,47 @@
+
+<div class="example-container mat-elevation-z8 conti">
+
+    <mat-table [dataSource]="dataSource" matSort>
+  
+      <!-- ID identifier -->
+      <ng-container matColumnDef="identifier">
+        <mat-header-cell *matHeaderCellDef  > Identifier </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.identifier}} </mat-cell>
+      </ng-container>
+
+      <!-- Progress Column -->
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef  > Email </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.email}} </mat-cell>
+      </ng-container>
+  
+      <!-- Name status -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef  > Status </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.status}} </mat-cell>
+      </ng-container>
+
+        <!-- Progress Column -->
+        <ng-container matColumnDef="request_time">
+            <mat-header-cell *matHeaderCellDef  > Request Time </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.request_time}} </mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="roles">
+            <mat-header-cell *matHeaderCellDef  > roles </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.awsArns}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;">
+        </mat-row>
+    </mat-table>
+</div>
+
+<table class="conti">
+    <thead>
+        <th>One</th>
+        <th>Two</th>
+    </thead>
+</table>

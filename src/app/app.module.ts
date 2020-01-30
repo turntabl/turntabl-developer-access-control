@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
-import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
 import {MenuItem} from 'primeng/api';                 //api
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { FormsModule } from '@angular/forms';
@@ -24,11 +23,15 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 // import { MdbNavBar} from './mdb-nav-bar.component';
 // import { ModalComponent } from './modal/modal.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { PendingComponent } from './pending/pending/pending.component';
+import  {MatTableModule }   from '@angular/material';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    PendingComponent,
+    MatTableModule
   ],
   imports: [
     BrowserModule,

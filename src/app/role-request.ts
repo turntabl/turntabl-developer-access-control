@@ -1,4 +1,6 @@
 export interface RoleRequest {
     awsArns: string[];
-    email: string; 
+    email: string;
+    explanation: string;
+    identifier: string; 
 }

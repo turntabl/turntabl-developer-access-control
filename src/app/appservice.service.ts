@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { RolesList } from './roles-list';
 import { RoleRequest } from './role-request';
+import { PendingRequests } from './pending-requests';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -20,6 +21,9 @@ export class AppserviceService {
 
   getRolesListing(): Observable<RolesList[]> {
     return this.httpClient.get<RolesList[]>(this.apiURL + 'roles');
+  }
+  getPendingPermission(): Observable<PendingRequests[]> {
+    return this.httpClient.get<PendingRequests[]>(this.apiURL + 'pending');
   }
   postRequest(roleRequest: RoleRequest): Observable<RoleRequest> {
     return this.httpClient.post<RoleRequest>(this.apiURL + 'send', roleRequest, httpOptions);

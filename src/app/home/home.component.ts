@@ -10,6 +10,7 @@ import { RoleRequest } from '../role-request';
 import { RolesList } from '../roles-list';
 import { AppserviceService } from '../appservice.service';
 import { CookieService } from 'ngx-cookie-service';
+import {Md5} from 'ts-md5/dist/md5';
 
 @Component({
   selector: 'app-home',
@@ -42,10 +43,7 @@ export class HomeComponent implements OnInit{
       error => { console.log(error); }
    ); 
   }
-
-  handleClick(event: Event){
-      console.log(event.target);
-  }
+ 
   onCheckChange(event) {
     this.msgShow = false;
     const formArray: FormArray = this.form.get('roles') as FormArray;
@@ -73,13 +71,14 @@ export class HomeComponent implements OnInit{
     this.selectedRoles = formArray.value;
   }
 
-  submit(){
-    console
-    if( this.selectedRoles.length > 0){
- 
+  submit(){ 
+
+    if( this.selectedRoles.length > 0){   
       let request: RoleRequest = {
       awsArns: this.selectedRoles,
-      email: this.userEmail
+      email: this.userEmail,
+      identifier: Md5.hashStr(Date.now + this.userEmail).toString().substring(0,8),
+      explanation: ""
     }; 
     
     const data = JSON.stringify(request);
