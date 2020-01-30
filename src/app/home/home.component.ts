@@ -43,6 +43,9 @@ export class HomeComponent implements OnInit{
    ); 
   }
 
+  handleClick(event: Event){
+      console.log(event.target);
+  }
   onCheckChange(event) {
     this.msgShow = false;
     const formArray: FormArray = this.form.get('roles') as FormArray;
@@ -71,6 +74,7 @@ export class HomeComponent implements OnInit{
   }
 
   submit(){
+    console
     if( this.selectedRoles.length > 0){
  
       let request: RoleRequest = {
