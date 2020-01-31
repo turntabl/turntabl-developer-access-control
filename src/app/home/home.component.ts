@@ -26,6 +26,11 @@ export class HomeComponent implements OnInit{
   userEmail = ''; 
   msgShow: boolean =  false;
   valid:boolean; 
+  static selectedRoles: any;
+  static userEmail: string;
+  static msg: string;
+  static valid: boolean;
+  static msgShow: boolean;
 
   constructor(private formBuilder: FormBuilder, private service: AppserviceService,  private cookieService: CookieService) {
     this.form = this.formBuilder.group({
