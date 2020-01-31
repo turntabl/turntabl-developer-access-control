@@ -25,7 +25,10 @@ export class HomeComponent implements OnInit{
   selectedRoles = []; 
   userEmail = ''; 
   msgShow: boolean =  false;
-  valid:boolean; 
+  valid:boolean;
+
+  // checked: boolean = false;
+
   static selectedRoles: any;
   static userEmail: string;
   static msg: string;
@@ -49,7 +52,13 @@ export class HomeComponent implements OnInit{
    ); 
   }
  
+  // onChecked() {
+  //   this.checked= !this.checked;
+  //   return false;
+  //   }
+
   onCheckChange(event) {
+    // this.onChecked();
     this.msgShow = false;
     const formArray: FormArray = this.form.get('roles') as FormArray;
   
@@ -74,6 +83,11 @@ export class HomeComponent implements OnInit{
       }); 
     }
     this.selectedRoles = formArray.value;
+  }
+
+ onCardClick(evt: MouseEvent){
+    this.onCheckChange(evt);
+    console.log(evt);
   }
 
   submit(){ 
