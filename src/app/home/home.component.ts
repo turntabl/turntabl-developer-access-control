@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -21,7 +21,7 @@ import {Md5} from 'ts-md5/dist/md5';
 export class HomeComponent implements OnInit{
   form: FormGroup;
   rolesList: RolesList[] = [];
-  msg: String = null;
+  msg: String = "Testing";
   selectedRoles = []; 
   userEmail = ''; 
   msgShow: boolean =  false;
@@ -35,12 +35,17 @@ export class HomeComponent implements OnInit{
   static valid: boolean;
   static msgShow: boolean;
 
+  // @Output() messageEvent = new EventEmitter<string>();
+  
   constructor(private formBuilder: FormBuilder, private service: AppserviceService,  private cookieService: CookieService) {
     this.form = this.formBuilder.group({
       roles: new FormArray([])
     });
   }
 
+  // sendMessage(){
+  //   this.messageEvent.emit(this.msg)
+  // }
   ngOnInit() {
     this.userEmail = this.cookieService.get('ttpEmail'); 
 
@@ -85,8 +90,8 @@ export class HomeComponent implements OnInit{
     this.selectedRoles = formArray.value;
   }
 
- onCardClick(evt: MouseEvent){
-    this.onCheckChange(evt);
+ onCardClick(evt: PointerEvent){
+    this.onCheckChange(evt.pressure);
     console.log(evt);
   }
 

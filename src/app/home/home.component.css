@@ -11,14 +11,18 @@
 	margin-top: 8%;
 	margin-bottom: 8%;
 }
-/* .btn-center{
-	margin-left: 27%;
+.btn-center{
+	margin-left: 40%;
 }
 .btn {
-	width: 40%;
+	width: 10%;
 	position: fixed;
-	border-radius: 10px;
-} */
+    border-radius: 7px;
+    /* margin-top: 7%; */
+    margin-left: 44%;
+    z-index: 999;
+}
+
 nav{
     margin-bottom: 2%;
 }

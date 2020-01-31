@@ -1,3 +1,6 @@
+<!-- <div>
+  <button class="btn btn-lg btn-success ">Submit</button>
+</div> -->
 <div class="text-center" *ngIf="msgShow == true" > 
   <div class="alert alert-danger" *ngIf="valid == false" role="alert">
     {{ msg }}
@@ -7,17 +10,30 @@
   </div>
 </div>
 
+
+<!-- <ion-card color="light" *ngFor="let pack of tmpPackages" icon-left>
+  <ion-card-content style="float:left;width:100%" (click)="event.selected = !event.selected">
+      
+      <ion-item style="background: transparent;">
+        <ion-label>{{choice.roleName}}</ion-label>
+        <ion-checkbox color="dark" (ionChange)="onCheckChange($event)" [(ngModel)]="pack.selected"></ion-checkbox>
+      </ion-item>
+      
+  </ion-card-content>
+</ion-card>
+ -->
+
+
 <div class="cardb col">
 <div class="fm form-container d-flex align-items-center col-6">
-  <form [formGroup]="form" (ngSubmit)="submit()">
-
+  <form [formGroup]="form"(ngSubmit)="submit()">
     <div *ngFor="let choice of rolesList; let i=index" class="form-group row car checkbox">
-      <mat-card >
+      <mat-card tabindex="0">
         <mat-card-content>
-      <div class="card btn-default" (click)="onCardClick($event)" style="width: 25rem; height: 10rem;">
+      <div class="card btn-default" (click)="handleClick($event); onCardClick($event); onCheckChange($event)" style="width: 25rem; height: 10rem;">
        <div class="card-body cab">
             <section class="section">
-              <mat-checkbox class="check-margin" [value]="choice.roleARN" (change)="onCheckChange($event)">
+              <mat-checkbox class="check-margin" [value]="choice.roleARN" (ionchange)="onCheckChange($event)">
          <h5 class="card-title">{{choice.roleName}}</h5>
          <h6 class="card-subtitle mb-2 text-muted">{{choice.description}}</h6>
         </mat-checkbox>
@@ -27,9 +43,12 @@
     </mat-card-content>
   </mat-card>
  </div>   
+
+
+
+
   </form>
 </div>
-
 <div class="text-center" *ngIf="msgShow == true" > 
   <div class="alert alert-danger" *ngIf="valid == false" role="alert">
     {{ msg }}

@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppserviceService } from './appservice.service';
 // Cookie stuff
 import {CookieService} from 'ngx-cookie-service';
+// import { IonicApp, IonicModule } from 'ionic-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -42,6 +43,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatCheckboxModule,
     //Pipe,
    //Directive,
+  //  IonicModule.forRoot(AppComponent),
     NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [
@@ -49,6 +51,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
   AppserviceService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, 
+    // IonicApp
+  ]
 })
 export class AppModule { }
