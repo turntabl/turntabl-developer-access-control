@@ -29,7 +29,7 @@
 	width: 10%;
 	position: fixed;
     border-radius: 7px;
-    margin-top: 3%;
+    margin-top: 14%;
     margin-left: 46%;
     z-index: 999;
 } 
@@ -86,7 +86,7 @@ body {
   }
 
   .cardb {
-	  margin-top: 3%;
+	  margin-top: 9%;
   }
   
   .section {
