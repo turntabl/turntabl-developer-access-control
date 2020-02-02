@@ -21,17 +21,18 @@ import {Md5} from 'ts-md5/dist/md5';
 export class HomeComponent implements OnInit{
   form: FormGroup;
   rolesList: RolesList[] = [];
-  msg: String = "Testing";
+  // msg: String = "Testing";
   selectedRoles = []; 
   userEmail = ''; 
   msgShow: boolean =  false;
   valid:boolean;
 
   // checked: boolean = false;
+  @Input() message: string;
 
   static selectedRoles: any;
   static userEmail: string;
-  static msg: string;
+  
   static valid: boolean;
   static msgShow: boolean;
 
@@ -46,6 +47,7 @@ export class HomeComponent implements OnInit{
   // sendMessage(){
   //   this.messageEvent.emit(this.msg)
   // }
+  // message: string;
   ngOnInit() {
     this.userEmail = this.cookieService.get('ttpEmail'); 
 
@@ -55,6 +57,8 @@ export class HomeComponent implements OnInit{
       },
       error => { console.log(error); }
    ); 
+
+// this.service.currentMessage.subscribe(message => this.message = message)
   }
  
   // onChecked() {
@@ -95,6 +99,9 @@ export class HomeComponent implements OnInit{
     console.log(evt);
   }
 
+  // newMessage() {
+  //   this.service.changeMessage("Hiiiiiii")
+  // }
   submit(){ 
     if( this.selectedRoles.length > 0){   
       let request: RoleRequest = {
@@ -104,18 +111,18 @@ export class HomeComponent implements OnInit{
       explanation: ""
     }; 
     
-    const data = JSON.stringify(request);
-    console.log(data);
-    //   this.service.postRequest(JSON.parse(data)).subscribe(
+    const service = JSON.stringify(request);
+    console.log(service);
+    //   this.service.postRequest(JSON.parse(service)).subscribe(
     //     result => { console.log(result); },
     //     error => { console.log(error); }
     //   ); 
-      this.msg = "Request successfully sent!";
+      this.message = "Request successfully sent!";
       this.valid = true;
     }
     else{
     this.valid = false;
-    this.msg = "Invalid Selection!"
+    this.message = "Invalid Selection!"
   }  
     this.msgShow = true;
   }

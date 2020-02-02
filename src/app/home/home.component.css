@@ -22,7 +22,31 @@
     margin-left: 44%;
     z-index: 999;
 }
+.btn-center{
+	margin-left: 27%;
+}
+.btn {
+	width: 10%;
+	position: fixed;
+    border-radius: 7px;
+    margin-top: 3%;
+    margin-left: 46%;
+    z-index: 999;
+} 
 
+.cdk-global-overlay-wrapper, .cdk-overlay-container {
+	z-index: 99999 !important;
+	z-index: 999;
+}
+
+
+.side {
+    box-shadow: 0 5px 5px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.belnav {
+	height: 5%;
+}
 nav{
     margin-bottom: 2%;
 }
@@ -62,7 +86,7 @@ body {
   }
 
   .cardb {
-	  margin-top: 4%;
+	  margin-top: 3%;
   }
   
   .section {
