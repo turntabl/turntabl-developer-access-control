@@ -27,16 +27,12 @@ export class HomeComponent implements OnInit{
   msgShow: boolean =  false;
   valid:boolean;
 
-  // checked: boolean = false;
-  @Input() message: string;
-
+  message: string;
   static selectedRoles: any;
   static userEmail: string;
   
   static valid: boolean;
   static msgShow: boolean;
-
-  // @Output() messageEvent = new EventEmitter<string>();
   
   constructor(private formBuilder: FormBuilder, private service: AppserviceService,  private cookieService: CookieService) {
     this.form = this.formBuilder.group({
@@ -44,10 +40,6 @@ export class HomeComponent implements OnInit{
     });
   }
 
-  // sendMessage(){
-  //   this.messageEvent.emit(this.msg)
-  // }
-  // message: string;
   ngOnInit() {
     this.userEmail = this.cookieService.get('ttpEmail'); 
 
@@ -57,17 +49,9 @@ export class HomeComponent implements OnInit{
       },
       error => { console.log(error); }
    ); 
-
-// this.service.currentMessage.subscribe(message => this.message = message)
   }
- 
-  // onChecked() {
-  //   this.checked= !this.checked;
-  //   return false;
-  //   }
 
   onCheckChange(event) {
-    // this.onChecked();
     this.msgShow = false;
     const formArray: FormArray = this.form.get('roles') as FormArray;
   
@@ -94,14 +78,11 @@ export class HomeComponent implements OnInit{
     this.selectedRoles = formArray.value;
   }
 
- onCardClick(evt: PointerEvent){
-    this.onCheckChange(evt.pressure);
-    console.log(evt);
-  }
-
-  // newMessage() {
-  //   this.service.changeMessage("Hiiiiiii")
-  // }
+//  onCardClick(evt: PointerEvent){
+//     this.onCheckChange(evt.pressure);
+//     console.log(evt);
+//   }
+  
   submit(){ 
     if( this.selectedRoles.length > 0){   
       let request: RoleRequest = {
@@ -113,10 +94,10 @@ export class HomeComponent implements OnInit{
     
     const service = JSON.stringify(request);
     console.log(service);
-    //   this.service.postRequest(JSON.parse(service)).subscribe(
-    //     result => { console.log(result); },
-    //     error => { console.log(error); }
-    //   ); 
+      // this.service.postRequest(JSON.parse(service)).subscribe(
+      //   result => { console.log(result); },
+      //   error => { console.log(error); }
+      // ); 
       this.message = "Request successfully sent!";
       this.valid = true;
     }
