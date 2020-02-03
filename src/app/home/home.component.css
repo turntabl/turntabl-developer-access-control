@@ -23,14 +23,14 @@
     z-index: 999;
 } */
 .btn-center{
-	margin-left: 40%;
+	margin-left: 27%;
 }
 .btn {
 	width: 10%;
 	position: fixed;
     border-radius: 7px;
-    margin-top: 7%;
-    /* margin-left: 9%; */
+    margin-top: 80%;
+    margin-left: 40%;
     z-index: 999;
 } 
 
@@ -86,7 +86,7 @@ body {
   }
 
   .cardb {
-	  margin-top: 9%;
+	  margin-top: 15%;
   }
   
   .section {
