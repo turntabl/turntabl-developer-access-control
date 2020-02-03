@@ -29,11 +29,14 @@
 	width: 10%;
 	position: fixed;
     border-radius: 7px;
-    margin-top: 2%;
+    margin-top: 3%;
     margin-left: 46%;
     z-index: 999;
 } 
-
+.mes {
+	margin-top: 10%;
+	margin-left: 1%;
+}
 /* .cdk-global-overlay-wrapper, .cdk-overlay-container {
 	z-index: 99999 !important;
 	z-index: 999;
