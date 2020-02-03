@@ -71,18 +71,18 @@ export class HomeComponent implements OnInit{
   
   submit(){ 
    
-    if( this.selectedRoles.length > 0 && this.cookieService.check('ttpEmail')){   
+    if( this.selectedRoles.length > 0 && this.cookieService.check('ttpEmail') ){   
       let request: RoleRequest = {
       awsArns: this.selectedRoles,
       email: this.userEmail 
       }; 
     
     const data = JSON.stringify(request); 
-    console.log(data);
-    /*  this.service.postRequest(JSON.parse(data)).subscribe(
+    // console.log(data);
+    this.service.postRequest(JSON.parse(data)).subscribe(
         result => { console.log(result); },
         error => { console.log(error); }
-      ); */
+      ); 
       this.message = "Request successfully sent!";
       this.valid = true;
     }
