@@ -34,8 +34,8 @@
     z-index: 999;
 } 
 .mes {
-	margin-top: 10%;
-	margin-left: 1%;
+	margin-top: 6%;
+	z-index: 999;
 }
 /* .cdk-global-overlay-wrapper, .cdk-overlay-container {
 	z-index: 99999 !important;
