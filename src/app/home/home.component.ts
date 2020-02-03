@@ -19,13 +19,12 @@ export class HomeComponent implements OnInit{
 
   form: FormGroup;
   rolesList: RolesList[] = [];
-  // msg: String = "Testing";
   selectedRoles : string[] = []; 
   userEmail = ''; 
   msgShow: boolean =  false;
   valid:boolean;
-
   message: string;
+
   static selectedRoles: any;
   static userEmail: string;
   static valid: boolean;
@@ -68,9 +67,7 @@ export class HomeComponent implements OnInit{
     } 
   }
  
-  
   submit(){ 
-   
     if( this.selectedRoles.length > 0 && this.cookieService.check('ttpEmail') ){   
       let request: RoleRequest = {
       awsArns: this.selectedRoles,
@@ -78,7 +75,7 @@ export class HomeComponent implements OnInit{
       }; 
     
     const data = JSON.stringify(request); 
-    // console.log(data);
+    console.log(data);
     this.service.postRequest(JSON.parse(data)).subscribe(
         result => { console.log(result); },
         error => { console.log(error); }
