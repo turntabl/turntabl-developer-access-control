@@ -85,7 +85,7 @@ export class HomeComponent implements OnInit{
     }
     else{
     this.valid = false;
-    this.message = "Invalid Selection!"
+    this.message = "Invalid Selection! Refresh the page and try again with a valid selection!"
   }  
     this.msgShow = true;
   }
