@@ -1,8 +1,4 @@
-import { Component } from '@angular/core';
-import { RolesList } from './roles-list';
-import { RoleRequest } from './role-request';
-import { Md5 } from 'ts-md5';
-import { HomeComponent } from './home/home.component';
+import { Component } from '@angular/core'; 
 
 @Component({
   selector: 'app-root',

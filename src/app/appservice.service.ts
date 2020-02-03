@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { RolesList } from './roles-list';
 import { RoleRequest } from './role-request';
 import { PendingRequests } from './pending-requests';
+import { BehaviorSubject } from 'rxjs';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,6 +17,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AppserviceService {
+
   private apiURL = 'https://permission.services.turntabl.io/v1/api/aws-mgnt/';
   constructor(private httpClient: HttpClient) { }
 
@@ -28,4 +30,10 @@ export class AppserviceService {
   postRequest(roleRequest: RoleRequest): Observable<RoleRequest> {
     return this.httpClient.post<RoleRequest>(this.apiURL + 'send', roleRequest, httpOptions);
   }
+
+  // private messageSource = new BehaviorSubject <string>("default message");
+  // currentMessage = this.messageSource.asObservable();
+  // changeMessage(message: string) {
+  //   this.messageSource.next(message)
+  // }
 }

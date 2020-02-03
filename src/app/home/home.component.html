@@ -90,17 +90,19 @@
 <div class="fm form-container d-flex align-items-center col-6">
   <form [formGroup]="form"(ngSubmit)="submit()">
     
-     <button class="btn btn-lg btn-primary btn-center">Submit</button>
-   
+     <button class="btn btn-lg btn-primary btn-center" type="submit"  >Submit</button>
+     <!-- <div class="align-items-center cdk-global-overlay-wrapper cdk-overlay-container ">
+      <button class="btn btn-lg btn-success btn-center">Submit</button>
+     </div> -->
    
     <div *ngFor="let choice of rolesList; let i=index" class="form-group row car checkbox">
       <mat-card tabindex="0">
         <mat-card-content>
-      <div class="card btn-default" (click)="onCheckChange($event)" style="width: 25rem; height: 10rem;">
+      <div class="card btn-default"  style="width: 25rem; height: 10rem;">
         <!-- onCardClick($event);  -->
         <div class="card-body cab">
             <section class="section">
-              <mat-checkbox class="check-margin" [value]="choice.roleARN" (click)="onCheckChange($event)">
+              <mat-checkbox class="check-margin" [value]="choice.roleARN" (change)="onCheckChange($event)">
          <h5 class="card-title">{{choice.roleName}}</h5>
          <h6 class="card-subtitle mb-2 text-muted">{{choice.description}}</h6>
         </mat-checkbox>
@@ -112,6 +114,7 @@
  </div>   
   </form>
 </div>
+
 <div class="text-center" *ngIf="msgShow == true" > 
   <div class="alert alert-danger" *ngIf="valid == false" role="alert">
     {{ msg }}

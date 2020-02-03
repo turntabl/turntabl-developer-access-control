@@ -1,16 +1,13 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
-  FormArray,
-  FormControl,
-  ValidatorFn
-} from '@angular/forms';
+  FormArray} from '@angular/forms';
 import { RoleRequest } from '../role-request';
 import { RolesList } from '../roles-list';
 import { AppserviceService } from '../appservice.service';
 import { CookieService } from 'ngx-cookie-service';
-import {Md5} from 'ts-md5/dist/md5';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-home',
@@ -19,10 +16,11 @@ import {Md5} from 'ts-md5/dist/md5';
 })
 
 export class HomeComponent implements OnInit{
+
   form: FormGroup;
   rolesList: RolesList[] = [];
   // msg: String = "Testing";
-  selectedRoles = []; 
+  selectedRoles : string[] = []; 
   userEmail = ''; 
   msgShow: boolean =  false;
   valid:boolean;
@@ -30,9 +28,9 @@ export class HomeComponent implements OnInit{
   message: string;
   static selectedRoles: any;
   static userEmail: string;
-  
   static valid: boolean;
   static msgShow: boolean;
+
   
   constructor(private formBuilder: FormBuilder, private service: AppserviceService,  private cookieService: CookieService) {
     this.form = this.formBuilder.group({
@@ -51,53 +49,40 @@ export class HomeComponent implements OnInit{
    ); 
   }
 
-  onCheckChange(event) {
+  onCheckChange(event: MatCheckboxChange) {
     this.msgShow = false;
-    const formArray: FormArray = this.form.get('roles') as FormArray;
-  
-    /* Selected */
-    if(event.target.checked){
+    
+    if(event.checked){ 
       // Add a new control in the arrayForm
-      formArray.push(new FormControl(event.target.value));
+      this.selectedRoles.push(event.source.value);
     }
     /* unselected */
-    else{
-      // find the unselected element
-      let i: number = 0;
-  
-      formArray.controls.forEach((ctrl: FormControl) => {
-        if(ctrl.value == event.target.value) {
-          // Remove the unselected element from the arrayForm
-          formArray.removeAt(i);
-          return;
-        }
-  
-        i++;
-      }); 
-    }
-    this.selectedRoles = formArray.value;
-  }
+    else{ 
+      const value = event.source.value;
 
-//  onCardClick(evt: PointerEvent){
-//     this.onCheckChange(evt.pressure);
-//     console.log(evt);
-//   }
+      this.selectedRoles = this.selectedRoles.filter(
+        (item) => {
+          return item !== value;
+        }
+      ); 
+    } 
+  }
+ 
   
   submit(){ 
-    if( this.selectedRoles.length > 0){   
+   
+    if( this.selectedRoles.length > 0 && this.cookieService.check('ttpEmail')){   
       let request: RoleRequest = {
       awsArns: this.selectedRoles,
-      email: this.userEmail,
-      identifier: Md5.hashStr(Date.now + this.userEmail).toString().substring(0,8),
-      explanation: ""
-    }; 
+      email: this.userEmail 
+      }; 
     
-    const service = JSON.stringify(request);
-    console.log(service);
-      // this.service.postRequest(JSON.parse(service)).subscribe(
-      //   result => { console.log(result); },
-      //   error => { console.log(error); }
-      // ); 
+    const data = JSON.stringify(request); 
+    console.log(data);
+    /*  this.service.postRequest(JSON.parse(data)).subscribe(
+        result => { console.log(result); },
+        error => { console.log(error); }
+      ); */
       this.message = "Request successfully sent!";
       this.valid = true;
     }
