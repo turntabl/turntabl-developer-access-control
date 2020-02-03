@@ -1,82 +1,4 @@
-
-<!-- Image and text -->
-
-<!-- <div class="text-center" *ngIf="msgShow == true" > 
-  <div class="alert alert-danger" *ngIf="valid == false" role="alert">
-    {{ msg }}
-  </div>
-  <div class="alert alert-success" *ngIf="valid == true" role="alert">
-    {{ msg }}
-  </div>
-</div>  -->
-
-<!-- <div class="fm form-container d-flex align-items-center col-6">
-  <form [formGroup]="form" (ngSubmit)="submit()">
-
-    <div class="align-items-center row ">
-        <button class="btn btn-lg btn-primary btn-center" >DONE</button>
-    </div>
-
-    <div *ngFor="let choice of rolesList; let i=index" class="form-group row car cardb checkbox">
-
-         <div class="card btn-default" style="width: 25rem; height: 10rem;">
-          <div class="card-body">
-            <input type="checkbox" [value]="choice.roleARN" (change)="onCheckChange($event)" class="chk"> -->
-            <!-- <input type="checkbox" [value]="choice.roleARN" class="form-check-input form-control chk" 
-            (change)="onCheckChange($event)" id="exampleCheck1"> -->
-            <!-- <h6 class="card-title">{{choice.roleName}}</h6>
-            <h6 class="card-subtitle mb-2 text-muted">{{choice.description}}</h6>
-          </div>
-        </div>
-
-    </div>   
-
-    <div class="align-items-center row">
-      <button class="btn btn-lg btn-primary btn-center" >DONE</button>
-    </div> -->
-
-    
-    <!-- <div class="cardb col">
-    <div class="fm form-container d-flex align-items-center col-6">
-      <form [formGroup]="form"(ngSubmit)="submit()">
-        <div class="side">
-          <nav class="navbar navbar-dark bg-primary side belnav mb-4">
-   
-            <div class="align-items-center cdk-global-overlay-wrapper cdk-overlay-container ">
-         <button class="btn btn-lg btn-success btn-center">Submit</button>
-        </div>
-         
-          </nav>
-        </div>
-        
-        <div *ngFor="let choice of rolesList; let i=index" class="form-group row car checkbox">
-          <mat-card tabindex="0">
-            <mat-card-content>
-          <div class="card btn-default" (click)="handleClick($event); onCardClick($event); onCheckChange($event)" style="width: 25rem; height: 10rem;">
-          <div class="card btn-default" (click)="onCardClick($event); onCheckChange($event)" style="width: 25rem; height: 10rem;">
-           <div class="card-body cab">
-                <section class="section">
-                  <mat-checkbox class="check-margin" [value]="choice.roleARN" (ionchange)="onCheckChange($event)">
-                    <h6 class="card-subtitle mb-2 text-muted">{{choice.description}}</h6>
-                    </mat-checkbox>
-                    </section> -->
-           <!-- </div>
-          </div>
-        </mat-card-content>
-      </mat-card>
-     </div>   
-  </form> -->
-<!-- </div>
-
-<div class="text-center" *ngIf="msgShow == true" > 
-  <div class="alert alert-danger" *ngIf="valid == false" role="alert">
-    {{ msg }}
-  </div>
-  <div class="alert alert-success" *ngIf="valid == true" role="alert">
-    {{ msg }}
-  </div>
-</div>  -->
-
+<!-- Success message -->
 <div class="text-center mes" *ngIf="msgShow == true" > 
   <div class="alert alert-danger" *ngIf="valid == false" role="alert">
     {{ message }}
@@ -86,20 +8,17 @@
   </div>
 </div>
 
-
+<!-- Main form -->
 <div class="cardb col">
 <div class="fm form-container d-flex align-items-center col-6">
   <form [formGroup]="form"(ngSubmit)="submit()">
     
      <button class="btn btn-lg btn-primary btn-center" type="submit">Submit</button>
-     <!-- <div class="align-items-center cdk-global-overlay-wrapper cdk-overlay-container ">
-      <button class="btn btn-lg btn-success btn-center">Submit</button>
-     </div> -->
+     
     <div *ngFor="let choice of rolesList; let i=index" class="form-group row car checkbox">
       <mat-card tabindex="0">
         <mat-card-content>
       <div class="card btn-default"  style="width: 25rem; height: 10rem;">
-        <!-- onCardClick($event);  -->
         <div class="card-body cab">
             <section class="section">
               <mat-checkbox class="check-margin" [value]="choice.roleARN" (change)="onCheckChange($event)">
@@ -114,12 +33,3 @@
  </div>   
   </form>
 </div>
-
-<!-- <div class="text-center" *ngIf="msgShow == true" > 
-  <div class="alert alert-danger" *ngIf="valid == false" role="alert">
-    {{ message }}
-  </div>
-  <div class="alert alert-success" *ngIf="valid == true" role="alert">
-    {{ message }}
-  </div>
-</div>  -->
