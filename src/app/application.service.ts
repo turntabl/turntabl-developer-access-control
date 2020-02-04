@@ -3,6 +3,7 @@ import { Observable } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Role } from "./role";
 import { RoleRequest } from "./role-request";
+import { CookieService } from "ngx-cookie-service";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -14,16 +15,19 @@ const httpOptions = {
   providedIn: "root"
 })
 export class ApplicationService {
-  private permissionServiceURL = "process.env.PERMISSIONS";
-  constructor(private httpClient: HttpClient) {}
+  private permissionsURL = this.cookieService.get("BACKEND_URL");
+
+  constructor(
+    private httpClient: HttpClient,
+    private cookieService: CookieService
+  ) {}
 
   getRole(): Observable<Role[]> {
-    return this.httpClient.get<Role[]>(this.permissionServiceURL + "role");
+    return this.httpClient.get<Role[]>(this.permissionsURL + "roles");
   }
-
   postRequest(roleRequest: RoleRequest): Observable<RoleRequest> {
     return this.httpClient.post<RoleRequest>(
-      this.permissionServiceURL + "send",
+      this.permissionsURL + "send",
       roleRequest,
       httpOptions
     );
