@@ -86,14 +86,14 @@ app.post(
       httpOnly: false
     });
     res.redirect(process.env.APP_RUNNER);
+
+    res.cookie("BACKEND_URL", process.env.PERMISSIONS, {
+      maxAge: 1 * 24 * 60 * 60 * 1000,
+      secure: true,
+      httpOnly: false
+    });
   }
 );
-//
-res.cookie("BACKEND_URL", process.env.PERMISSIONS, {
-  maxAge: 1 * 24 * 60 * 60 * 1000,
-  secure: true,
-  httpOnly: false
-});
 
 app.all("*", function(req, res, next) {
   if (req.isAuthenticated() || process.env.NODE_ENV !== "production") {
