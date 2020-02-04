@@ -20,11 +20,6 @@ export class HomeComponent implements OnInit {
   validSelection: boolean;
   message: string;
 
-  // static selectedRoles: any;
-  // static userEmail: string;
-  // static validSelection: boolean;
-  // static msgShow: boolean;
-
   constructor(
     private formBuilder: FormBuilder,
     private service: ApplicationService,

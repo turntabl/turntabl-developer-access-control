@@ -15,13 +15,13 @@ const httpOptions = {
   providedIn: "root"
 })
 export class ApplicationService {
-  private permissionsURL: string ;
+  private permissionsURL: string;
 
   constructor(
     private httpClient: HttpClient,
-    private cookieService: CookieService
+    private cookieURL: CookieService
   ) {
-    this.permissionsURL = this.cookieService.get("BACKEND_URL");
+    this.permissionsURL = this.cookieURL.get("BACKEND_URL");
   }
 
   getRole(): Observable<Role[]> {
