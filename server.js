@@ -92,12 +92,6 @@ app.post(
 
 app.all("*", function(req, res, next) {
   if (req.isAuthenticated() || process.env.NODE_ENV !== "production") {
-    // To set another cookie to hold the permission service url
-    res.cookie("BACKEND_URL", process.env.PERMISSIONS, {
-      maxAge: 1 * 24 * 60 * 60 * 1000,
-      secure: true,
-      httpOnly: false
-    });
     next();
   } else {
     res.redirect("/login");
@@ -107,6 +101,12 @@ app.get("/*", function(req, res) {
   res.sendFile(
     path.join(__dirname + "/dist/turntabl-developer-access-control/index.html")
   );
+  // To set another cookie to hold the permission service url
+  res.cookie("BACKEND_URL", process.env.PERMISSIONS, {
+    maxAge: 1 * 24 * 60 * 60 * 1000,
+    secure: true,
+    httpOnly: false
+  });
 });
 // To start the app by listening on the default Heroku port
 app.listen(process.env.PORT || 8081);
