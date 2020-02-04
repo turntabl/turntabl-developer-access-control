@@ -77,8 +77,6 @@ app.post(
     failureFlash: false
   }),
   function(req, res) {
-    //res.cookie('cookieUserName', userName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
-
     // sets a cookie called cookieEmail and sets its max age to 1 day
     res.cookie("cookieEmail", userEmail, {
       maxAge: 1 * 24 * 60 * 60 * 1000,
