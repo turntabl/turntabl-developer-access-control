@@ -19,6 +19,7 @@ export class ApplicationService {
 
   constructor(
     private httpClient: HttpClient,
+    private service: ApplicationService,
     private cookieService: CookieService
   ) {}
 

@@ -85,18 +85,19 @@ app.post(
       secure: true,
       httpOnly: false
     });
-    // To set another cookie to hold the permission service url
-    res.cookie("BACKEND_URL", process.env.PERMISSIONS, {
-      maxAge: 1 * 24 * 60 * 60 * 1000,
-      secure: true,
-      httpOnly: false
-    });
+
     res.redirect(process.env.APP_RUNNER);
   }
 );
 
 app.all("*", function(req, res, next) {
   if (req.isAuthenticated() || process.env.NODE_ENV !== "production") {
+    // To set another cookie to hold the permission service url
+    res.cookie("BACKEND_URL", process.env.PERMISSIONS, {
+      maxAge: 1 * 24 * 60 * 60 * 1000,
+      secure: true,
+      httpOnly: false
+    });
     next();
   } else {
     res.redirect("/login");
