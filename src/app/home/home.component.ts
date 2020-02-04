@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.userEmail = this.cookieService.get("cookieEmail");
-
+    this.cookieService.get("BACKEND_URL");
     this.service.getRole().subscribe(
       result => {
         this.roles = result;
