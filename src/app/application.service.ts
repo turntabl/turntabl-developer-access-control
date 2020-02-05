@@ -21,12 +21,22 @@ export class ApplicationService {
     private httpClient: HttpClient,
     private cookieService: CookieService
   ) {
-    this.permissionsURL = "process.env.PERMISSIONS";
+    // this.permissionsURL = "process.env.PERMISSIONS";
+    this.httpClient
+      .get<any>(window.location.origin + "/roleServer")
+      .subscribe(res => {
+        sessionStorage.setItem("permissionsURL", res.url);
+      });
   }
-
-  getRoles(): Observable<Role[]> {
-    return this.httpClient.get<Role[]>(this.permissionsURL);
+  getRoles(result): Observable<Response> {
+    return this.httpClient.post<Response>(
+      sessionStorage.getItem("permissionsURL"),
+      result
+    );
   }
+  // getRoles(): Observable<Role[]> {
+  //   return this.httpClient.get<Role[]>(this.permissionsURL);
+  // }
   postRequest(roleRequest: RoleRequest): Observable<RoleRequest> {
     return this.httpClient.post<RoleRequest>(
       this.permissionsURL + "send",

@@ -12,6 +12,10 @@ const app = express();
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + "/dist/turntabl-developer-access-control"));
 
+app.get("/roleServer", (req, res) => {
+  res.json({ url: process.env.PERMISSIONS });
+});
+
 app.use(cookieParser());
 app.use(
   cookieSession({
@@ -84,11 +88,11 @@ app.post(
       httpOnly: false
     });
     // To set another cookie to hold the permission service url
-    res.cookie("roleServer", process.env.PERMISSIONS, {
-      maxAge: 1 * 24 * 60 * 60 * 1000,
-      secure: true,
-      httpOnly: false
-    });
+    // res.cookie("roleServer", process.env.PERMISSIONS, {
+    //   maxAge: 1 * 24 * 60 * 60 * 1000,
+    //   secure: true,
+    //   httpOnly: false
+    // });
     res.redirect(process.env.APP_RUNNER);
   }
 );
