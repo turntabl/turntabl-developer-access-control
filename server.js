@@ -12,10 +12,6 @@ const app = express();
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + "/dist/turntabl-developer-access-control"));
 
-app.get("/roleServer", (req, res) => {
-  res.json({ url: process.env.PERMISSIONS });
-});
-
 app.use(cookieParser());
 app.use(
   cookieSession({
@@ -104,6 +100,11 @@ app.all("*", function(req, res, next) {
     res.redirect("/login");
   }
 });
+
+app.get("/roleServer", (req, res) => {
+  res.json({ permissionsURL: process.env.PERMISSIONS });
+});
+
 app.get("/*", function(req, res) {
   res.sendFile(
     path.join(__dirname + "/dist/turntabl-developer-access-control/index.html")

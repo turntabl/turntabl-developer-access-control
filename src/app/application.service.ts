@@ -25,7 +25,7 @@ export class ApplicationService {
     this.httpClient
       .get<any>(window.location.origin + "/roleServer")
       .subscribe(res => {
-        sessionStorage.setItem("permissionsURL", res.url);
+        sessionStorage.setItem("permissionsURL", res.permissionsURL);
       });
   }
   getRoles(result): Observable<Response> {
