@@ -34,11 +34,11 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.userEmail = this.cookieService.get("cookieEmail");
     // this.loadPermissions = this.cookieService.get("backend_URL");
-    this.service.getRoles("rol").subscribe(
-      result => {
-        // this.roles = result;
-        // this.loadPermissions;
-      },
+    this.service.getRoles(this.loadPermissions).subscribe(
+      // result => {
+      // this.roles = loadPermissions;
+      // this.loadPermissions ;
+      // },
       error => {
         console.log(error);
       }
