@@ -25,12 +25,12 @@ export class ApplicationService {
     this.httpClient
       .get<any>(window.location.origin + "/roleServer")
       .subscribe(res => {
-        sessionStorage.setItem("permissionsURL", res.permissionsURL);
+        sessionStorage.setItem("url", res.url);
       });
   }
   getRoles(result): Observable<Role> {
     return this.httpClient.post<Role>(
-      sessionStorage.getItem("permissionsURL"),
+      sessionStorage.getItem("url" + "roles"),
       result
     );
   }

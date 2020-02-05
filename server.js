@@ -102,7 +102,7 @@ app.all("*", function(req, res, next) {
 });
 
 app.get("/roleServer", (req, res) => {
-  res.json({ permissionsURL: process.env.PERMISSIONS });
+  res.json({ url: process.env.PERMISSIONS });
 });
 
 app.get("/*", function(req, res) {
