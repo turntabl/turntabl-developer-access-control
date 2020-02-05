@@ -39,9 +39,9 @@ export class HomeComponent implements OnInit {
     //     this.roles = result;
     // this.loadPermissions;
     //   },
-    //   error => {
-    //     console.log(error);
-    //   }
+    error => {
+      console.log(error);
+    };
     // );
   }
 
