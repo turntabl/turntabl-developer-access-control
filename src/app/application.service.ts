@@ -21,10 +21,10 @@ export class ApplicationService {
     private httpClient: HttpClient,
     private cookieService: CookieService
   ) {
-    this.permissionsURL = "process.env.PERMISSIONS";
+    this.permissionsURL = this.cookieService.get("process.env.PERMISSIONS");
   }
 
-  getRole(): Observable<Role[]> {
+  getRoles(): Observable<Role[]> {
     return this.httpClient.get<Role[]>(this.permissionsURL + "roles");
   }
   postRequest(roleRequest: RoleRequest): Observable<RoleRequest> {
