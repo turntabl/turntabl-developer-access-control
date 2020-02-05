@@ -25,7 +25,7 @@ export class ApplicationService {
   }
 
   getRoles(): Observable<Role[]> {
-    return this.httpClient.get<Role[]>(this.permissionsURL + "roles");
+    return this.httpClient.get<Role[]>(this.permissionsURL);
   }
   postRequest(roleRequest: RoleRequest): Observable<RoleRequest> {
     return this.httpClient.post<RoleRequest>(
