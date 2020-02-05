@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   roles: Role[] = [];
   selectedRoles: string[] = [];
   userEmail = "";
+  loadPermissions = "";
   msgShow: boolean = false;
   validSelection: boolean;
   message: string;
@@ -32,10 +33,11 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.userEmail = this.cookieService.get("cookieEmail");
-    // this.cookieService.get("backend_URL");
+    // this.loadPermissions = this.cookieService.get("backend_URL");
     this.service.getRoles().subscribe(
       result => {
         this.roles = result;
+        // this.loadPermissions;
       },
       error => {
         console.log(error);
