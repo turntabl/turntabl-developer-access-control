@@ -34,15 +34,15 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.userEmail = this.cookieService.get("cookieEmail");
     // this.loadPermissions = this.cookieService.get("backend_URL");
-    // this.service.getRoles().subscribe(
-    //   result => {
-    //     this.roles = result;
-    // this.loadPermissions;
-    //   },
-    error => {
-      console.log(error);
-    };
-    // );
+    this.service.getRoles().subscribe(
+      result => {
+        this.roles = result;
+        // this.loadPermissions;
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   onCheckChange(event: MatCheckboxChange) {
