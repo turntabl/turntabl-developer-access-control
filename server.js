@@ -84,12 +84,12 @@ app.post(
       httpOnly: false
     });
     // To set another cookie to hold the permission service url
-    res.cookie("backend_URL", process.env.APP_RUNNER, {
+    res.cookie("roleServer", process.env.PERMISSIONS, {
       maxAge: 1 * 24 * 60 * 60 * 1000,
       secure: true,
       httpOnly: false
     });
-    res.redirect(process.env.PERMISSIONS);
+    res.redirect(process.env.APP_RUNNER);
   }
 );
 
