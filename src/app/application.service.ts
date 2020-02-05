@@ -21,7 +21,7 @@ export class ApplicationService {
     private httpClient: HttpClient,
     private cookieService: CookieService
   ) {
-    this.permissionsURL = this.cookieService.get("roleServer");
+    this.permissionsURL = process.env.PERMISSIONS;
   }
 
   getRoles(): Observable<Role[]> {
