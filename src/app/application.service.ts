@@ -28,8 +28,8 @@ export class ApplicationService {
         sessionStorage.setItem("url", res.url);
       });
   }
-  getRoles(result): Observable<Role> {
-    return this.httpClient.post<Role>(sessionStorage.getItem("url"), result);
+  getRoles(): Observable<Role[]> {
+    return this.httpClient.get<Role[]>(sessionStorage.getItem("url"));
   }
   // getRoles(): Observable<Role[]> {
   //   return this.httpClient.get<Role[]>(this.permissionsURL);
