@@ -29,10 +29,7 @@ export class ApplicationService {
       });
   }
   getRoles(result): Observable<Role> {
-    return this.httpClient.post<Role>(
-      sessionStorage.getItem("url" + "roles"),
-      result
-    );
+    return this.httpClient.post<Role>(sessionStorage.getItem("url"), result);
   }
   // getRoles(): Observable<Role[]> {
   //   return this.httpClient.get<Role[]>(this.permissionsURL);

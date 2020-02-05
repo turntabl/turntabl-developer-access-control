@@ -103,6 +103,7 @@ app.all("*", function(req, res, next) {
 
 app.get("/roleServer", (req, res) => {
   res.json({ url: process.env.PERMISSIONS });
+  req.urlencoded();
 });
 
 app.get("/*", function(req, res) {
