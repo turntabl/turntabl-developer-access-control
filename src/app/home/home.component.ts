@@ -34,16 +34,9 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.userEmail = this.cookieService.get("cookieEmail");
 
-    // this.loadPermissions = this.cookieService.get("backend_URL");
-    this.service.getRoles().subscribe(
-      result => {
-        this.roles = result;
-        // this.loadPermissions;
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    this.service.getRoles().subscribe(result => {
+      this.roles = result;
+    });
   }
 
   onCheckChange(event: MatCheckboxChange) {
@@ -53,7 +46,7 @@ export class HomeComponent implements OnInit {
       // Add a new control in the arrayForm
       this.selectedRoles.push(event.source.value);
     } else {
-      /* unselected */
+      // unselected
       const value = event.source.value;
 
       this.selectedRoles = this.selectedRoles.filter(item => {
