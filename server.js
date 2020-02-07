@@ -25,6 +25,7 @@ passport.use(
       path: "/auth/saml/callback" // or callback is the ACS URL path
     },
     function(profile, done) {
+      userEmail = profile.nameID;
       return done(null, {
         email: profile.email
       });
@@ -59,9 +60,9 @@ app.post(
     failureRedirect: "/error",
     failureFlash: false
   }),
-  function(profile, res) {
+  function(req, res) {
     // sets a cookie called cookieEmail and sets its max age to 1 day
-    res.cookie("cookieEmail", profile.nameID, {
+    res.cookie("cookieEmail", userEmail, {
       maxAge: 1 * 24 * 60 * 60 * 1000,
       secure: true,
       httpOnly: false
