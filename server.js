@@ -102,11 +102,13 @@ app.all("*", function(req, res, next) {
 });
 
 app.get("/roleServer", (req, res) => {
-  res.json({ url: process.env.PERMISSIONS });
+  res.json({ permissionsURL: process.env.PERMISSIONS });
   // req.urlencoded();
 });
 
 app.get("/*", function(req, res) {
+  res.cookie("backend_url", process.env.PERMISSIONS);
+  //console.log(process.env.PERMISSIONS);
   res.sendFile(
     path.join(__dirname + "/dist/turntabl-developer-access-control/index.html")
   );

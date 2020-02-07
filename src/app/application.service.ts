@@ -21,15 +21,10 @@ export class ApplicationService {
     private httpClient: HttpClient,
     private cookieService: CookieService
   ) {
-    // this.permissionsURL = "process.env.PERMISSIONS";
-    this.httpClient
-      .get<any>(window.location.origin + "/roleServer")
-      .subscribe(res => {
-        sessionStorage.setItem("url", res.url);
-      });
+    this.permissionsURL = this.cookieService.get("backend_url");
   }
   getRoles(): Observable<Role[]> {
-    return this.httpClient.get<Role[]>(sessionStorage.getItem("url"));
+    return this.httpClient.get<Role[]>(this.permissionsURL + "roles");
   }
   // getRoles(): Observable<Role[]> {
   //   return this.httpClient.get<Role[]>(this.permissionsURL);
