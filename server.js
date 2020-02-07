@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
 const app = express();
-let userEmail = "";
+
 // To serve just the static files form the dist directory
 app.use(express.static(__dirname + "/dist/turntabl-developer-access-control"));
 
@@ -60,7 +60,7 @@ app.post(
     failureRedirect: "/error",
     failureFlash: false
   }),
-  function(req, res) {
+  function(profile, res) {
     // sets a cookie called cookieEmail and sets its max age to 1 day
     res.cookie("cookieEmail", userEmail, {
       maxAge: 1 * 24 * 60 * 60 * 1000,
@@ -87,4 +87,4 @@ app.get("/*", function(req, res) {
   );
 });
 // To start the app by listening on the default Heroku port
-app.listen(process.env.PORT || 8080);
+app.listen(process.env.PORT || 8083);
