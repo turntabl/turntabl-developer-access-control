@@ -17,7 +17,7 @@ app.use(
   cookieSession({
     name: "session",
     keys: [process.env.SECRET],
-    maxAge: 2 * 24 * 60 * 60 * 1000 // 2 days
+    maxAge: 2 * 24 * 60 * 1000 // 1 days
   })
 );
 
@@ -96,9 +96,10 @@ app.get("/roleServer", (req, res) => {
 
 app.get("/*", function(req, res) {
   res.cookie("backend_url", process.env.PERMISSIONS);
+  console.log(process.env.SECRET);
   res.sendFile(
     path.join(__dirname + "/dist/turntabl-developer-access-control/index.html")
   );
 });
 // To start the app by listening on the default Heroku port
-app.listen(process.env.PORT || 8081);
+app.listen(process.env.PORT || 8082);
