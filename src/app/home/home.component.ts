@@ -31,4 +31,57 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  
+  ngOnInit() {
+    this.userEmail = this.cookieService.get("cookieEmail");
+
+    // this.loadPermissions = this.cookieService.get("backend_URL");
+    this.service.getRoles().subscribe(
+      result => {
+        this.roles = result;
+        // this.loadPermissions;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  onCheckChange(event: MatCheckboxChange) {
+    this.msgShow = false;
+
+    if (event.checked) {
+      // Add a new control in the arrayForm
+      this.selectedRoles.push(event.source.value);
+    } else {
+      /* unselected */
+      const value = event.source.value;
+
+      this.selectedRoles = this.selectedRoles.filter(item => {
+        return item !== value;
+      });
+    }
+  }
+
+  submit() {
+    if (
+      this.selectedRoles.length > 0 &&
+      this.cookieService.check("cookieEmail")
+    ) {
+      let request: RoleRequest = {
+        awsArns: this.selectedRoles,
+        email: this.userEmail
+      };
+
+      const data = JSON.stringify(request);
+      console.log(data);
+      this.service.postRequest(JSON.parse(data)).subscribe();
+      this.message = "Request successfully sent!";
+      this.validSelection = true;
+    } else {
+      this.validSelection = false;
+      this.message =
+        "Invalid Selection! Refresh the page and try again with a valid selection!";
+    }
+    this.msgShow = true;
+  }
+}
