@@ -31,7 +31,8 @@ passport.use(
       protocol: "https://",
       // SSO URL to load the server.js to get the various module exports after authentication.
       entryPoint: process.env.ENTRY_POINT,
-      issuer: process.env.ISSUER, // Entity ID for identity provider
+      // Entity ID for identity provider
+      issuer: process.env.ISSUER,
       path: "/auth/saml/callback" // or callback is the ACS URL path
     },
     function(profile, done) {
