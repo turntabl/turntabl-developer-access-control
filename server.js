@@ -13,13 +13,6 @@ const app = express();
 app.use(express.static(__dirname + "/dist/turntabl-developer-access-control"));
 
 app.use(cookieParser());
-app.use(
-  cookieSession({
-    name: "session",
-    keys: ["super secret"],
-    maxAge: 2 * 24 * 60 * 60 * 1000 // 2 days
-  })
-);
 app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
@@ -83,12 +76,6 @@ app.post(
       secure: true,
       httpOnly: false
     });
-    // To set another cookie to hold the permission service url
-    // res.cookie("roleServer", process.env.PERMISSIONS, {
-    //   maxAge: 1 * 24 * 60 * 60 * 1000,
-    //   secure: true,
-    //   httpOnly: false
-    // });
     res.redirect(process.env.APP_RUNNER);
   }
 );
