@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
 const app = express();
-
+let userEmail = "";
 // To serve just the static files form the dist directory
 app.use(express.static(__dirname + "/dist/turntabl-developer-access-control"));
 
