@@ -11,7 +11,6 @@ const app = express();
 app.use(express.static(__dirname + "/dist/turntabl-developer-access-control"));
 
 app.use(cookieParser());
-
 app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
@@ -60,7 +59,7 @@ app.post(
     failureRedirect: "/error",
     failureFlash: false
   }),
-  function(req, res) {
+  function(profile, res) {
     // sets a cookie called cookieEmail and sets its max age to 1 day
     res.cookie("cookieEmail", profile.nameID, {
       maxAge: 1 * 24 * 60 * 60 * 1000,
