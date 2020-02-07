@@ -5,21 +5,23 @@ const passport = require("passport");
 const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
-let userEmail = "";
 
 const app = express();
 
-// Serve only the static files form the dist directory
-app.use(express.static(__dirname + '/dist/turntabl-developer-access-control'));
+// To serve just the static files form the dist directory
+app.use(express.static(__dirname + "/dist/turntabl-developer-access-control"));
 
 app.use(cookieParser());
+
 app.use(
+  // To protect the cookies
   cookieSession({
     name: "session",
-    keys: ["super secret"],
-    maxAge: 2 * 24 * 60 * 60 * 1000 // 2 days
+    keys: [process.env.SECRET],
+    maxAge: 2 * 24 * 60 * 1000 // For just 1 day
   })
 );
+
 app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
@@ -28,33 +30,30 @@ passport.use(
   new SamlStrategy(
     {
       protocol: "https://",
-      entryPoint: process.env.ENTRY_POINT, // SSO URL (Step 2)
-      issuer: process.env.ISSUER, // Entity ID (Step 4)
-      path: "/auth/saml/callback", // or callback is the ACS URL path (Step 4)
-      // cert: process.env.CERTIFICATE
+      // SSO URL to load the server.js to get the various module exports after authentication.
+      entryPoint: process.env.ENTRY_POINT,
+
+      // Entity ID for identity provider
+      issuer: process.env.ISSUER,
+
+      path: "/auth/saml/callback" // or callback is the ACS URL path
     },
-    function (profile, done) {
-      // Parse user profile data
-      console.log("profile", profile);
-      
-      // console.log("assertion", profile.getAssertion.toString());
+    function(profile, done) {
       userEmail = profile.nameID;
-      //userName = profile.
+
       return done(null, {
         email: profile.email
-        //name: profile.name
       });
     }
   )
 );
-passport.serializeUser(function (user, done) {
+passport.serializeUser(function(user, done) {
   done(null, user);
 });
 
-passport.deserializeUser(function (user, done) {
+passport.deserializeUser(function(user, done) {
   done(null, user);
 });
-
 app.get(
   "/login",
   passport.authenticate("saml", {
@@ -63,11 +62,9 @@ app.get(
   })
 );
 
-app.get("/logout", function (req, res) {
-//   res.clearCookie('ttemail')
+app.get("/logout", function(req, res) {
   req.logout();
   res.redirect("https://turntabl.io");
-  // res.end("You have logged out.");
 });
 
 app.post(
@@ -77,24 +74,30 @@ app.post(
     failureRedirect: "/error",
     failureFlash: false
   }),
-  function (req, res) {
-    // sets a cookie called ttemail and sets its max age to 1 day
-    //res.cookie('ttUserName', userName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
-    res.cookie('ttpEmail', userEmail, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
-    res.redirect("https://turntabl-user-accesscontrol.herokuapp.com/home");
+  function(req, res) {
+    // sets a cookie called cookieEmail and sets its max age to 1 day
+    res.cookie("cookieEmail", userEmail, {
+      maxAge: 1 * 24 * 60 * 1000,
+      secure: true,
+      httpOnly: false
+    });
+    res.redirect(process.env.APP_RUNNER);
   }
 );
 
-app.all("*", function (req, res, next) {
+app.all("*", function(req, res, next) {
   if (req.isAuthenticated() || process.env.NODE_ENV !== "production") {
     next();
   } else {
     res.redirect("/login");
   }
 });
-app.get("/*", function (req, res) {
-  res.sendFile(path.join(__dirname + "/dist/turntabl-developer-access-control/index.html"));
-});
 
-// Start the app by listening on the default Heroku port
-app.listen(process.env.PORT || 8080);
+app.get("/*", function(req, res) {
+  res.cookie("backend_url", process.env.PERMISSIONS);
+  res.sendFile(
+    path.join(__dirname + "/dist/turntabl-developer-access-control/index.html")
+  );
+});
+// To start the app by listening on the default Heroku port
+app.listen(process.env.PORT || 8082);

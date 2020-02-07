@@ -1,55 +1,46 @@
-
-<!-- Image and text -->
-<nav class="navbar navbar-primary bg-info">
-  <a class="navbar-brand" href="#">
-    <img src="../../assets/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-    Turntabl
-  </a>
-</nav>
-
-<div class="text-center" *ngIf="msgShow == true" > 
-  <div class="alert alert-danger" *ngIf="valid == false" role="alert">
-    {{ msg }}
+<!-- Success message -->
+<div class="text-center mes" *ngIf="msgShow == true">
+  <div class="alert alert-danger" *ngIf="validSelection == false" role="alert">
+    {{ message }}
   </div>
-  <div class="alert alert-success" *ngIf="valid == true" role="alert">
-    {{ msg }}
+  <div class="alert alert-success" *ngIf="validSelection == true" role="alert">
+    {{ message }}
   </div>
-</div> 
-
-<div class="fm form-container d-flex align-items-center col-6">
-  <form [formGroup]="form" (ngSubmit)="submit()">
-
-    <div class="align-items-center row">
-        <button class="btn btn-lg btn-success btn-center" >submit</button>
-    </div>
-
-    <div *ngFor="let choice of rolesList; let i=index" class="form-group row car">
-
-         <div class="card ca btn btn-default"  style="width: 22rem;">
-          <div class="card-body">
-            <h6 class="card-title">{{choice.roleName}}</h6>
-            <h6 class="card-subtitle mb-2 text-muted">Description</h6>
-            <p class="card-text">{{choice.description}}</p>
-            <input type="checkbox" [value]="choice.roleARN"  class="form-check-input form-control chk" (change)="onCheckChange($event)" id="exampleCheck1">
-          </div>
-        </div>
-
-    </div>   
-
-    <div class="align-items-center row">
-      <button class="btn btn-lg btn-success btn-center" >submit</button>
-    </div>
-
-  </form>
 </div>
 
-<div class="text-center" *ngIf="msgShow == true" > 
-  <div class="alert alert-danger" *ngIf="valid == false" role="alert">
-    {{ msg }}
-  </div>
-  <div class="alert alert-success" *ngIf="valid == true" role="alert">
-    {{ msg }}
-  </div>
-</div> 
+<!-- Main form -->
+<div class="cardb col">
+  <div class="fm form-container d-flex align-items-center col-6">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <button class="btn btn-lg btn-primary btn-center" type="submit">
+        Submit
+      </button>
 
-   
+      <div
+        *ngFor="let role of roles; let i = index"
+        class="form-group row car checkbox"
+      >
+        <mat-card tabindex="0">
+          <mat-card-content>
+            <div class="card btn-default" style="width: 25rem; height: 10rem;">
+              <div class="card-body cab">
+                <section class="section">
+                  <mat-checkbox
+                    class="check-margin"
+                    [value]="role.roleARN"
+                    (change)="onCheckChange($event)"
+                  >
+                    <h5 class="card-title">{{ role.roleName }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                      {{ role.description }}
+                    </h6>
+                  </mat-checkbox>
+                </section>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </form>
+  </div>
+</div>

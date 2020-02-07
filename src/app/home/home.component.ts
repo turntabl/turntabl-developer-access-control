@@ -1,99 +1,80 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  FormArray,
-  FormControl,
-  ValidatorFn
-} from '@angular/forms';
-import { RoleRequest } from '../role-request';
-import { RolesList } from '../roles-list';
-import { AppserviceService } from '../appservice.service';
-import { CookieService } from 'ngx-cookie-service';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, FormArray } from "@angular/forms";
+import { RoleRequest } from "../role-request";
+import { Role } from "../role";
+import { ApplicationService } from "../application.service";
+import { CookieService } from "ngx-cookie-service";
+import { MatCheckboxChange } from "@angular/material/checkbox";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: "app-home",
+  templateUrl: "./home.component.html",
+  styleUrls: ["./home.component.css"]
 })
-
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit {
   form: FormGroup;
-  rolesList: RolesList[] = [];
-  msg: String = null;
-  selectedRoles = []; 
-  userEmail = ''; 
-  msgShow: boolean =  false;
-  valid:boolean; 
+  roles: Role[] = [];
+  selectedRoles: string[] = [];
+  userEmail = "";
+  loadPermissions = "";
+  msgShow: boolean = false;
+  validSelection: boolean;
+  message: string;
 
-  constructor(private formBuilder: FormBuilder, private service: AppserviceService,  private cookieService: CookieService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private service: ApplicationService,
+    private cookieService: CookieService
+  ) {
     this.form = this.formBuilder.group({
-      roles: new FormArray([])
+      roleform: new FormArray([])
     });
   }
 
   ngOnInit() {
-    this.userEmail = this.cookieService.get('ttpEmail'); 
+    this.userEmail = this.cookieService.get("cookieEmail");
 
-    this.service.getRolesListing().subscribe(
-      result => {
-          this.rolesList = result;
-      },
-      error => { console.log(error); }
-   ); 
+    this.service.getRoles().subscribe(result => {
+      this.roles = result;
+    });
   }
 
-  onCheckChange(event) {
+  onCheckChange(event: MatCheckboxChange) {
     this.msgShow = false;
-    const formArray: FormArray = this.form.get('roles') as FormArray;
-  
-    /* Selected */
-    if(event.target.checked){
+
+    if (event.checked) {
       // Add a new control in the arrayForm
-      formArray.push(new FormControl(event.target.value));
+      this.selectedRoles.push(event.source.value);
+    } else {
+      // unselected
+      const value = event.source.value;
+
+      this.selectedRoles = this.selectedRoles.filter(item => {
+        return item !== value;
+      });
     }
-    /* unselected */
-    else{
-      // find the unselected element
-      let i: number = 0;
-  
-      formArray.controls.forEach((ctrl: FormControl) => {
-        if(ctrl.value == event.target.value) {
-          // Remove the unselected element from the arrayForm
-          formArray.removeAt(i);
-          return;
-        }
-  
-        i++;
-      }); 
-    }
-    this.selectedRoles = formArray.value;
   }
 
-  submit(){
-    if( this.selectedRoles.length > 0 && this.cookieService.check('ttpEmail')){
- 
+  submit() {
+    if (
+      this.selectedRoles.length > 0 &&
+      this.cookieService.check("cookieEmail")
+    ) {
       let request: RoleRequest = {
-      awsArns: this.selectedRoles,
-      email: this.userEmail
-    }; 
-    
-     const data = JSON.stringify(request);
-      this.service.postRequest(JSON.parse(data)).subscribe(
-        result => { console.log(result); },
-        error => { console.log(error); }
-      );
-      console.log(data);
-      this.msg = "Request successfully sent!";
-      this.valid = true;
-    }
-    else{
-    
-      this.valid = false;
-    this.msg = "Invalid Selection!"
-  }  
-    this.msgShow = true;
- 
-  }
+        awsArns: this.selectedRoles,
+        email: this.userEmail
+      };
 
+      const data = JSON.stringify(request);
+      console.log(data);
+      this.service.postRequest(JSON.parse(data)).subscribe();
+      this.message = "Request successfully sent!";
+      this.validSelection = true;
+    } else {
+      this.validSelection = false;
+      this.message =
+        "Invalid Selection! Refresh the page and try again with a valid selection!";
+    }
+    this.msgShow = true;
+  }
 }
