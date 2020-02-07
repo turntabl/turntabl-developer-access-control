@@ -12,13 +12,15 @@ const app = express();
 app.use(express.static(__dirname + "/dist/turntabl-developer-access-control"));
 
 app.use(cookieParser());
+
 app.use(
   cookieSession({
     name: "session",
-    keys: ["super secret"],
+    keys: ["process.env.SECRET"],
     maxAge: 2 * 24 * 60 * 60 * 1000 // 2 days
   })
 );
+
 app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
